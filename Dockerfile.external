@@ -1,0 +1,14 @@
+# ---- Run Build ----
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+COPY . /app/
+WORKDIR /app
+RUN dotnet restore POB.SRV0025.sln
+RUN dotnet publish POB.SRV0025.sln -c Release -o out
+
+# ---- Run App ----
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 as release
+ENV SWAGGER_YAML_FILE "swagger.yaml"
+WORKDIR /app
+COPY --from=build /app/out .
+COPY swagger.yaml .
+ENTRYPOINT ["dotnet", "FrameworksAndDrivers.dll"]

@@ -1,0 +1,84 @@
+version: '3.7'
+
+services:
+  
+  api-prudential-pruduct-redis:
+    image: redis:latest
+    container_name: api-prudential-pruduct-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - api-prudential-pruduct-net        
+    restart: always
+    privileged: true
+    tty: true  
+
+  api-prudential-pruduct-postgres:
+    image: postgres
+    container_name: api-prudential-pruduct-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
+    networks:
+      - api-prudential-pruduct-net        
+    restart: always
+    privileged: true
+    tty: true
+
+  api-prudential-pruduct-pgadmin4:
+    image: dpage/pgadmin4
+    container_name: api-prudential-pruduct-pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "test@test.com"
+      PGADMIN_DEFAULT_PASSWORD: "123"
+    ports:
+    depends_on:
+      - api-prudential-pruduct-postgres
+    networks:
+      - api-prudential-pruduct-net    
+    links:
+      - api-prudential-pruduct-postgres:db      
+    restart: always
+    privileged: true
+    tty: true
+
+  api-prudential-pruduct-sonarqube:
+    image: sonarqube:8.3.1-community
+    container_name: api-prudential-pruduct-sonarqube
+    ports:
+      - "9000:9000" 
+    networks:
+      - api-prudential-pruduct-net       
+    restart: always
+    privileged: true
+    tty: true
+
+  api-prudential-pruduct-api:
+    image: api-prudential-pruduct-api
+    container_name: api-prudential-pruduct-api
+    build:
+      context: .
+      dockerfile: Dockerfile.external
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      REDIS_CONNECTION_STRING: "redis,port: 6379"
+      DATABASE_CONNECTION_STRING: "Host=db;Port=5432;Pooling=true;Database=products;User Id=postgres;Password=postgres;"
+    ports:
+      - "5000:80"
+    depends_on:
+      - api-prudential-pruduct-redis
+      - api-prudential-pruduct-postgres      
+    networks:
+      - api-prudential-pruduct-net     
+    links:
+      - api-prudential-pruduct-redis:redis
+      - api-prudential-pruduct-postgres:db         
+    restart: always
+    privileged: true
+    tty: true
+
+networks:
+  api-prudential-pruduct-net:
+    external: true

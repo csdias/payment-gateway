@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  
+   api-prudential-pruduct-sonarscanner:
+    image: api-prudential-pruduct-sonarscanner
+    container_name: api-prudential-pruduct-sonarscanner
+    build:
+      context: .
+      dockerfile: Dockerfile.sonarscanner
+    environment:
+      PROJECT_SLN: POB.SRV0025.sln
+      SONAR_URI: http://127.0.0.1:9000/ 
+      SONAR_PROJECT_KEY: POB.SRV0025
+    privileged: true
+    tty: true
