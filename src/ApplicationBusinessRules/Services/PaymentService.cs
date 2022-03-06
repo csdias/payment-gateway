@@ -20,29 +20,29 @@ namespace ApplicationBusinessRules.Services
             IUpdatePaymentStatusUseCase updatePaymentStatus
         ) 
         {
-            this._getPayment = getPayment;
-            this._createPayment = createPayment;
-            this._updatePaymentStatus = updatePaymentStatus;
+            _getPayment = getPayment;
+            _createPayment = createPayment;
+            _updatePaymentStatus = updatePaymentStatus;
         }
 
         public async Task<Response<Payment>> GetPayment(Guid id)
         {
-            return await this._getPayment.GetPayment(id);
+            return await _getPayment.GetPayment(id);
         }
 
         public async Task<Response<List<Payment>>> GetPayments(Payment payment) 
         {
-            return await this._getPayment.GetPayments(payment);
+            return await _getPayment.GetPayments(payment);
         }
 
         public async Task<Response<bool>> CreatePayment(Payment payment)
         {
-            return await this._createPayment.CreatePayment(payment);
+            return await _createPayment.CreatePayment(payment);
         }
 
         public async Task<Response<Payment>> UpdatePaymentStatus(Payment payment)
         {
-            return await this._updatePaymentStatus.UpdatePaymentStatus(payment);
+            return await _updatePaymentStatus.UpdatePaymentStatus(payment);
         }
     }
 }

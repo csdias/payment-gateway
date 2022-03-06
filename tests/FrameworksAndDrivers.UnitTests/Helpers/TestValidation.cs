@@ -5,7 +5,7 @@ namespace FrameworksAndDrivers.UnitTests.Helpers
 {
     public static class TestValidation
     {
-        public static IEnumerable<ValidationResult> getValidationErros(object obj)
+        public static IEnumerable<ValidationResult> GetValidationErros(object obj)
         {
             var validationResult = new List<ValidationResult>();
             var context = new ValidationContext(obj, null, null);

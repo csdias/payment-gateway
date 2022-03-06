@@ -41,7 +41,7 @@ namespace FrameworksAndDrivers.Database.Contexts
         {
             modelBuilder.Entity<PaymentModel>(entity =>
             {
-                entity.HasIndex(p => new { p.PaymentStatusId });
+                entity.HasIndex(p => new { p.StatusId });
             });
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())  

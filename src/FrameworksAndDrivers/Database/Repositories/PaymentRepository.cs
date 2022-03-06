@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using EnterpriseBusinessRules.Entities;
 using ApplicationBusinessRules.Helpers;
+using InterfaceAdapters.Interfaces;
 using ApplicationBusinessRules.Interfaces;
 using FrameworksAndDrivers.Database.Models;
 using FrameworksAndDrivers.Database.Contexts;
 using System.Collections.Generic;
+using EnterpriseBusinessRules.Entities.ResourceParameters;
 
 namespace FrameworksAndDrivers.Database.Repositories
 {
@@ -16,11 +18,14 @@ namespace FrameworksAndDrivers.Database.Repositories
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IPropertyMappingService _propertyMappingService;
 
-        public PaymentRepository(ApplicationDbContext dbContext, IMapper mapper)
+        public PaymentRepository(ApplicationDbContext dbContext, IMapper mapper,
+            IPropertyMappingService propertyMappingService)
         {
-            this._dbContext = dbContext;
-            this._mapper = mapper;
+            _dbContext = dbContext;
+            _mapper = mapper;
+            _propertyMappingService = propertyMappingService;
         }
 
         public async Task<Response<Payment>> GetPayment(Guid id)
@@ -48,12 +53,44 @@ namespace FrameworksAndDrivers.Database.Repositories
             }
         }
 
+        public PagedList<Payment> GetPayments(PaymentResourceParameters paymentResourceParameters)
+        {
+            if (paymentResourceParameters == null)
+            {
+                throw new ArgumentNullException(nameof(paymentResourceParameters));
+            }
+
+            var collection = _dbContext.Payments as IQueryable<Payment>;
+
+            if (!string.IsNullOrWhiteSpace(paymentResourceParameters.SearchQuery))
+            {
+
+                var searchQuery = paymentResourceParameters.SearchQuery.Trim();
+                collection = collection.Where(a => a.ClientId == searchQuery
+                    || (a.Id != null && a.Id.ToString().Contains(searchQuery)));
+            }
+
+            if (!string.IsNullOrWhiteSpace(paymentResourceParameters.OrderBy))
+            {
+                // get property mapping dictionary
+                var authorPropertyMappingDictionary =
+                    _propertyMappingService.GetPropertyMapping<Payment, PaymentModel>();
+
+                collection = collection.ApplySort(paymentResourceParameters.OrderBy,
+                    authorPropertyMappingDictionary);
+            }
+
+            return PagedList<Payment>.Create(collection,
+                paymentResourceParameters.PageNumber,
+                paymentResourceParameters.PageSize);
+        }
+
         public async Task<Response<List<Payment>>> GetPayments(Payment payment)
         {
             try
             {
                 var pays = await this._dbContext.Payments.AsNoTracking()
-                    .Where(item => item.ClientId == payment.Client)
+                    .Where(item => item.ClientId == payment.ClientId)
                     .FirstOrDefaultAsync();
                 if (pays == null)
                 {

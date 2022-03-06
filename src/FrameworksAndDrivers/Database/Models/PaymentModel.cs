@@ -24,13 +24,13 @@ namespace FrameworksAndDrivers.Database.Models
         public Dictionary<string, object> CreditCard { get; set; }
 
         [Required]
-        [Column("value")]
-        public float Value { get; set; } = 0;
+        [Column("ammount")]
+        public decimal Ammount { get; set; } = 0;
 
         [Required]
         [MaxLength(255)]
-        [Column("payment_status_id")]
-        public short PaymentStatusId { get; set; }
+        [Column("status_id")]
+        public short StatusId { get; set; }
         //TODO: set the fk
 
         //[Required]

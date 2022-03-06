@@ -27,9 +27,9 @@ namespace InterfaceAdapters.Controllers
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ApiExplorerSettings(GroupName = "v1")]
-        public ActionResult Login([FromBody] LoginEntity input)
+        public ActionResult Login([FromBody] Client input)
         {
-            var login = ValidatorHelper.ValidateEntity<LoginEntity>(input);
+            var login = ValidatorHelper.ValidateEntity<Client>(input);
             if (login.HasErrors())
             {
                 return Ok(login.GetMessages());
