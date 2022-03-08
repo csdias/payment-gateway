@@ -18,7 +18,6 @@ namespace FrameworksAndDrivers.Web.Sessions
         {
             if(!this._session.ContainsKey("ClientId"))
             {
-                //TODO: Remove (Default value during testing = Life Planner)
                 //this.SetClientId("A953DC88-EB1B-350C-E053-2C118C0A2285");
                 this.SetClientId(_context.HttpContext.User.FindFirst("ClientId")?.Value);
             }

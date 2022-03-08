@@ -24,14 +24,12 @@ namespace FrameworksAndDrivers.UnitTests.Repositories
         private readonly ITestOutputHelper _output;
         private Mock<ApplicationDbContext> _mockDbContext;
         private readonly IMapper _mapper;
-        private readonly IPropertyMappingService _propertyMappingService;
 
-        public PaymentRepositoryTest(ITestOutputHelper output, IMapper mapper, IPropertyMappingService propertyMappingService)
+        public PaymentRepositoryTest(ITestOutputHelper output, IMapper mapper)
         {
             _output = output;
             _mapper = mapper;
             MockDbContext();
-            _propertyMappingService = propertyMappingService;
         }
 
         private PaymentRepositoryTest MockDbContext()
@@ -48,7 +46,7 @@ namespace FrameworksAndDrivers.UnitTests.Repositories
         public async void GetPayments_Should_ReturnPayments()
         {
             // Assert
-            var repo = new PaymentRepository(_mockDbContext.Object, _mapper, _propertyMappingService); //ToDo: Use a mock mapper
+            var repo = new PaymentRepository(_mockDbContext.Object, _mapper);
             var payment = new Payment
             {
                 ClientId = "A953DC88EB1B350CE0532C118C0A2285"

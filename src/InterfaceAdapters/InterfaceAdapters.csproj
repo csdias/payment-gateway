@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -13,12 +13,8 @@
    <ItemGroup>
      <PackageReference Include="AutoMapper" Version="11.0.1" />
      <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
-     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
-     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.17" />
-   </ItemGroup>
-
-   <ItemGroup>
-     <Folder Include="ResourseParameters\" />
+     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
+     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.18" />
    </ItemGroup>
 
 </Project>

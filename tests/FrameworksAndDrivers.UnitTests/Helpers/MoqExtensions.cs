@@ -5,7 +5,7 @@ using Moq;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.Query.Internal;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace FrameworksAndDrivers.UnitTests.Helpers
 {

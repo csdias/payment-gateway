@@ -8,12 +8,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using FluentAssertions;
-using Newtonsoft.Json;
 using Xunit;
 using FrameworksAndDrivers;
 using EnterpriseBusinessRules.Entities;
-using System.Text;
-using InterfaceAdapters.IntegrationTests.Helpers;
 
 namespace InterfaceAdapters.IntegrationTests.Controllers
 {
@@ -51,12 +48,9 @@ namespace InterfaceAdapters.IntegrationTests.Controllers
 
             // Assert
             var context = await response.Content.ReadAsStringAsync();
-            var payments = JsonConvert.DeserializeObject<Payment>(context);
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             response.Content.Headers.ContentType.ToString().Should().Be("application/json; charset=utf-8");
-            payments.Should().BeOfType<Payment>();
-            payments.Should().BeNull();
         }
     }
 }
