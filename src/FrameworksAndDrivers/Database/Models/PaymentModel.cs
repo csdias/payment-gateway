@@ -20,6 +20,7 @@ namespace FrameworksAndDrivers.Database.Models
         public string ClientId { get; set; }
 
         [Required]
+        [NotMapped]
         [Column("credit_card", TypeName = "jsonb")]
         public Dictionary<string, object> CreditCard { get; set; }
 

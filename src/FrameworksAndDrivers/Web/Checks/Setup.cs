@@ -17,7 +17,6 @@ namespace FrameworksAndDrivers.Web.Checks
         {           
             services
                 .AddHealthChecks()
-                .AddRedis(configuration["REDIS_CONNECTION_STRING"], "redis")
                 .AddNpgSql(configuration["DATABASE_CONNECTION_STRING"], "select now()")
                 .AddDbContextCheck<ApplicationDbContext>(name: "database")
                 .AddProcessAllocatedMemoryHealthCheck(1024)

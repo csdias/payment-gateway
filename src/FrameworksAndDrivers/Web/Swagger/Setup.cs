@@ -1,11 +1,8 @@
-using System.IO;
-using YamlDotNet.Serialization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
+using Microsoft.OpenApi.Models;
 
 namespace FrameworksAndDrivers.Web.Swagger
 {
@@ -13,38 +10,24 @@ namespace FrameworksAndDrivers.Web.Swagger
     {
         public static IServiceCollection AddFrameworksAndDriversWebSwagger(this IServiceCollection services,
             IConfiguration configuration)
-        {     
-            return services;              
-        }
-
-        public static IApplicationBuilder UseFrameworksAndDriversWebSwagger(this IApplicationBuilder app, 
-            IWebHostEnvironment env, IConfiguration configuration)
         {
-            app.UseSwaggerUI(c =>
+            services.AddSwaggerGen(opts =>
             {
-                c.SwaggerEndpoint(
-                    configuration["SWAGGER_JSON_ROUTE"],
-                    configuration["SWAGGER_API_NAME"]
-                );
-                c.RoutePrefix = string.Empty;
+                opts.SwaggerDoc("v1", new OpenApiInfo { Title = "Payment Gateway Api", Version = "v1" });
             });
 
-            var deserializer = new DeserializerBuilder()
-                .Build();
+            return services;
+        }
 
-            var swaggerObject = deserializer.Deserialize(
-                File.OpenText(configuration["SWAGGER_YAML_FILE"])
-            );
+        public static IApplicationBuilder UseFrameworksAndDriversWebSwagger(this IApplicationBuilder app,
+            IWebHostEnvironment env, IConfiguration configuration)
+        {
+            app.UseSwagger();
 
-            var swaggerJson = JsonConvert.SerializeObject(swaggerObject);
-
-            app.UseEndpoints(endpoints =>
+            app.UseSwaggerUI(c =>
             {
-                endpoints.MapControllers();
-                endpoints.MapGet(configuration["SWAGGER_JSON_ROUTE"], async context =>
-                {  
-                    await context.Response.WriteAsync(swaggerJson);
-                });
+                c.SwaggerEndpoint("./swagger/v1/swagger.json", "Payment Gateway Api");
+                c.RoutePrefix = string.Empty;
             });
 
             return app;

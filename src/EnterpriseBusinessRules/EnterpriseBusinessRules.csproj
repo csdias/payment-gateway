@@ -9,8 +9,4 @@
     <PackageReference Include="FluentValidation" Version="8.6.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Z.Expressions.Eval" Version="4.0.1" />
-  </ItemGroup>
-
 </Project>
