@@ -4,11 +4,11 @@ Api that allows merchants to complete credit card transactions.
 ## About
 This is a study purpose project.
 
-It applies good practices and uses clean architecture and can be host in the cloud
+It applies good practices, uses clean architecture and can be host in the cloud
 
 Environment options: 
-On premisses using docker containers (docker-compose.external.yml)
-On cloud using terraform and aws (buildspec.yml and .terraform)
+On Amazon Cloud through Terraform
+On premisses through Docker [deprecated]
 
 ## AWS Environment
 Amazon Resources Created Using Terraform
@@ -27,12 +27,12 @@ An Http Api Gateway of proxy type and lambda integration
 A subnet group attaching the two public subnets and using the vcp security group
 One RDS Postgres
 
-## Environment Variables
 
+## Environment Variables
 
 * `DATABASE_CONNECTION_STRING` - Connection string with relational database.
 
-### Using the Payment Gateway Api
+### Installing
 
 
 Download Terraform and Intall. => https://www.terraform.io/downloads
@@ -47,9 +47,9 @@ Download Terraform and Intall. => https://www.terraform.io/downloads
 
 ### Install dependencies
 ```
-  npm install && npm run restore
+  npm install
+  npm run restore
 ```
-
 
 ### Unit Tests
 ```
@@ -58,23 +58,31 @@ Download Terraform and Intall. => https://www.terraform.io/downloads
 You can check the results on the prompt or open the coverage folder, inside it, open index.html in any browser.
 
 ### Deploying
+Install the Amazon Lambda Tools
 ```
-Install the Amazon Lambda Tools > dotnet tool install -g Amazon.Lambda.Tools
-Got to .\FrameworksAndDrivers
-Run dotnet lambda package (this will create a zip file be used as an artifact from terraform to deploy to the AWS Cloud)
+  dotnet tool install -g Amazon.Lambda.Tools
+```
+Create a zipped artifact to be deployed to Amazon Cloud
+```
+  cd .\FrameworksAndDrivers
+  dotnet lambda package 
+```
 
-Pre-Requisites To Creating Infrastructure on AWS Using Terraform
-It is required AWS IAM API keys (access key and secret key) for creating and deleting permissions for all AWS resources.
-Terraform should be installed on the machine. If Terraform does not exist you can download and install it from https://www.terraform.io/downloads.
+Pre-Requisites to create an infrastructure on AWS using Terraform
+It is required AWS IAM API keys (access key and secret key) for creating and deleting permissions for all 
+AWS resources. Terraform should be installed on the machine. If Terraform does not exist you can download and 
+install it from https://www.terraform.io/downloads.
 
-
-Got to .\terraform
-Run > terraform init
-Run > terraform plan
-Run > terrform apply
-Type yes when questioned if you agree to deploy to Amazon Cloud (there may be costs applied by Amazon AWS)
+```
+  cd .\terraform
+  terraform init
+  terraform plan
+  terrform apply
+```
+Type yes when questioned if you agree to deploy to Amazon Cloud (there might be costs applied by Amazon AWS)
 
 To destroy everything and stop incorring in costs
-Run > terraform destroy
+```
+  terraform destroy
 
 ```
