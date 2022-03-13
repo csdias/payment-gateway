@@ -30,10 +30,9 @@ machine in the public subnet.
 
 ## Environment Variables
 
-* `DATABASE_CONNECTION_STRING` - Connection string with relational database.
+* `DATABASE_CONNECTION_STRING` - Connection string with relational database. ie. Host=127.0.0.1;Port=5432;Pooling=true;Database=PaymentGateway;User Id=postgres;Password=postgrespwd;"
 
 ### Installing
-
 
 Download Terraform and Intall. => https://www.terraform.io/downloads
 
@@ -57,7 +56,13 @@ Download Terraform and Intall. => https://www.terraform.io/downloads
 ```
 You can check the results on the prompt or open the coverage folder, inside it, open index.html in any browser.
 
-### Deploying
+### Running locally
+
+Open the solution and press F5
+
+Use the Payment Transation fc782e65-0117-4c5e-b6d0-afa845effa3e in the GET method
+
+### Deploying to Cloud
 Install the Amazon Lambda Tools
 ```
   dotnet tool install -g Amazon.Lambda.Tools

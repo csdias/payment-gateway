@@ -48,44 +48,45 @@ namespace FrameworksAndDrivers.Database.Contexts
                 entity.HasIndex(p => new { p.StatusId });
             });
 
-            foreach (var entityType in modelBuilder.Model.GetEntityTypes())  
-            {  
-                if (entityType.ClrType.GetCustomAttributes(typeof(AuditableAttribute), true).Length > 0)  
-                {  
-                    modelBuilder
-                        .Entity(entityType.Name)
-                        .Property<DateTime>("CreatedAt")
-                        .HasColumnName("created");  
-                    modelBuilder
-                        .Entity(entityType.Name)
-                        .Property<DateTime>("UpdatedAt")
-                        .HasColumnName("updated");
-                }  
-            }    
+            //foreach (var entityType in modelBuilder.Model.GetEntityTypes())  
+            //{  
+            //    if (entityType.ClrType.GetCustomAttributes(typeof(AuditableAttribute), true).Length > 0)  
+            //    {  
+            //        modelBuilder
+            //            .Entity(entityType.Name)
+            //            .Property<DateTime>("CreatedAt")
+            //            .HasColumnName("created");  
+            //        modelBuilder
+            //            .Entity(entityType.Name)
+            //            .Property<DateTime>("UpdatedAt")
+            //            .HasColumnName("updated");
+            //    }  
+            //}
+            
             base.OnModelCreating(modelBuilder);  
             modelBuilder.Seed();
         }
 
-        public override int SaveChanges()  
-        {  
-            ChangeTracker.DetectChanges();  
-            var timestamp = DateTime.Now;  
+        //public override int SaveChanges()  
+        //{  
+        //    ChangeTracker.DetectChanges();  
+        //    var timestamp = DateTime.Now;  
   
-            foreach (var entry in ChangeTracker.Entries()  
-                    .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))  
-            {               
-                if (entry.Entity.GetType().GetCustomAttributes(typeof(AuditableAttribute), true).Length > 0)  
-                {  
-                    entry.Property("UpdatedAt").CurrentValue = timestamp;  
+        //    foreach (var entry in ChangeTracker.Entries()  
+        //            .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))  
+        //    {               
+        //        if (entry.Entity.GetType().GetCustomAttributes(typeof(AuditableAttribute), true).Length > 0)  
+        //        {  
+        //            entry.Property("UpdatedAt").CurrentValue = timestamp;  
   
-                    if (entry.State == EntityState.Added)  
-                    {  
-                        entry.Property("CreatedAt").CurrentValue = timestamp; 
-                        entry.Property("UpdatedAt").CurrentValue = timestamp;  
-                    }  
-                }  
-            }  
-            return base.SaveChanges();  
-        }  
+        //            if (entry.State == EntityState.Added)  
+        //            {  
+        //                entry.Property("CreatedAt").CurrentValue = timestamp; 
+        //                entry.Property("UpdatedAt").CurrentValue = timestamp;  
+        //            }  
+        //        }  
+        //    }  
+        //    return base.SaveChanges();  
+        //}  
     }
 }
