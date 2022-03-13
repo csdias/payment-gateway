@@ -8,11 +8,19 @@ namespace EnterpriseBusinessRules.Entities
     public class PaymentFilter: IEntity
     {
         public Guid? Id { get; set; }
-        public string ClientId { get; set; }
-        public CreditCard CreditCard { get; set; }
-        public decimal Ammount { get; set; }
+
+        public long MerchantId { get; set; }
+
+        public string CreditCardNumber { get; set; }
+
+        public decimal AmountFrom { get; set; }
+
+        public decimal AmountTo { get; set; }
+
         public DateTime DateFrom { get; set; }
+
         public DateTime DateTo { get; set; }
+
         public short StatusId { get; set; }
 
         public ValidationResult Validate() 

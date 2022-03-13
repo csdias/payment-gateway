@@ -7,7 +7,7 @@ namespace EnterpriseBusinessRules.Validators
     {
         public PaymentValidator()
         {
-            RuleFor(c => c.Ammount)
+            RuleFor(c => c.Amount)
                 .NotEmpty()
                 .WithMessage("{PropertyName} is required");
             RuleFor(c => c.CreditCard).NotEmpty().WithMessage("{PropertyName} is required");

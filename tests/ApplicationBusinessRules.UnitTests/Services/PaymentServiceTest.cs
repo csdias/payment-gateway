@@ -17,11 +17,15 @@ namespace ApplicationBusinessRules.UnitTests.UseCases
         private readonly Mock<IGetPaymentUseCase> _mockGetPaymentUseCase;
         private readonly Mock<ICreatePaymentUseCase> _mockCreatePaymentUseCase;
         private readonly Mock<IUpdatePaymentStatusUseCase> _mockUpdatePaymentStatusUseCase;
+        private readonly Mock<IValidateCreditCardUseCase> _validateCreditCardUseCase;
+        private readonly Mock<IPaymentQueueProcessorService> _paymentQueueProcessorService;
 
         public PaymentServiceTest() {
-            this._mockGetPaymentUseCase = new Mock<IGetPaymentUseCase>(MockBehavior.Strict);
-            this._mockCreatePaymentUseCase = new Mock<ICreatePaymentUseCase>(MockBehavior.Strict);
-            this._mockUpdatePaymentStatusUseCase = new Mock<IUpdatePaymentStatusUseCase>(MockBehavior.Strict);
+            _mockGetPaymentUseCase = new Mock<IGetPaymentUseCase>(MockBehavior.Strict);
+            _mockCreatePaymentUseCase = new Mock<ICreatePaymentUseCase>(MockBehavior.Strict);
+            _mockUpdatePaymentStatusUseCase = new Mock<IUpdatePaymentStatusUseCase>(MockBehavior.Strict);
+            _validateCreditCardUseCase = new Mock<IValidateCreditCardUseCase>(MockBehavior.Strict);
+            _paymentQueueProcessorService = new Mock<IPaymentQueueProcessorService>(MockBehavior.Strict);
         }
 
         [Fact]
@@ -30,9 +34,10 @@ namespace ApplicationBusinessRules.UnitTests.UseCases
             var expectedResponseFromUseCase = new Response<Payment>();
             
             _mockGetPaymentUseCase.Setup(s => s.GetPayment(It.IsAny<Guid>()))
-                     .Returns(() => Task.Run( () => expectedResponseFromUseCase));
-            var sut = new PaymentService(_mockGetPaymentUseCase.Object, _mockCreatePaymentUseCase.Object
-                , _mockUpdatePaymentStatusUseCase.Object);
+                    .Returns(() => Task.Run( () => expectedResponseFromUseCase));
+            var sut = new PaymentService(_mockGetPaymentUseCase.Object, _mockCreatePaymentUseCase.Object,
+                    _mockUpdatePaymentStatusUseCase.Object, _paymentQueueProcessorService.Object,
+                    _validateCreditCardUseCase.Object);
 
             // Act
             var result = await sut.GetPayment(Guid.NewGuid());
@@ -52,8 +57,9 @@ namespace ApplicationBusinessRules.UnitTests.UseCases
             this._mockGetPaymentUseCase.Setup(s => s.GetPayment(It.IsAny<Guid>()))
                     .Returns(() => Task.Run(() => expectedResponseFromUseCase));
 
-            var sut = new PaymentService(_mockGetPaymentUseCase.Object, _mockCreatePaymentUseCase.Object
-                , _mockUpdatePaymentStatusUseCase.Object);
+            var sut = new PaymentService(_mockGetPaymentUseCase.Object, _mockCreatePaymentUseCase.Object,
+                    _mockUpdatePaymentStatusUseCase.Object, _paymentQueueProcessorService.Object,
+                    _validateCreditCardUseCase.Object);
 
             // Act
             var result = await sut.GetPayment(Guid.NewGuid());
@@ -72,12 +78,27 @@ namespace ApplicationBusinessRules.UnitTests.UseCases
         }
 
         private List<Payment> GetExpectedPayments() {
-            var payI = new Payment() {};
-            var payII = new Payment() {};
-
             return new List<Payment>() {
-                payI,
-                payII
+                new Payment {
+                    Id = Guid.Parse("fc782e65-0117-4c5e-b6d0-afa845effa3e"),
+                    MerchantId = 1,
+                    CreditCardId = 1,
+                    CreditCard = new CreditCard()
+                    {
+                        Id = 1,
+                        Number = "379354508162306",
+                        HolderName = "Antônio J. Penteado",
+                        HolderAddress = "Heroic St. 195",
+                        ExpirationMonth = "12",
+                        ExpirationYear = "2025",
+                        Cvv = "323",
+                        StatusId = 1
+                    },
+                    Amount = 15.99m,
+                    Currency = "EUR",
+                    SaleDescription = "Final soccer match",
+                    StatusId = 1
+                }
             };
         }
     }

@@ -36,7 +36,11 @@ namespace FrameworksAndDrivers.Database.Contexts
 
         public virtual DbSet<PaymentModel> Payments { get; set; }
         public virtual DbSet<PaymentStatusModel> PaymentStatuses { get; set; }
-       
+        public virtual DbSet<CreditCardModel> CreditCards { get; set; }
+        public virtual DbSet<MerchantModel> Merchants { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PaymentModel>(entity =>

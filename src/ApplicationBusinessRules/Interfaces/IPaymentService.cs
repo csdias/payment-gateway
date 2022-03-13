@@ -9,7 +9,8 @@ namespace ApplicationBusinessRules.Interfaces
     {
         Task<Response<Payment>> GetPayment(Guid id);
         Task<Response<List<Payment>>> GetPayments(Payment payment);
-        Task<Response<bool>> CreatePayment(Payment payment);
+        Task<Response<Payment>> CreatePayment(Payment payment);
         Task<Response<Payment>> UpdatePaymentStatus(Payment payment);
+        Task<Response<CreditCard>> ValidateCard(CreditCard creditCard);
     }
 }

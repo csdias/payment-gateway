@@ -1,23 +1,21 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using InterfaceAdapters.Interfaces;
 using EnterpriseBusinessRules.Entities;
 using ApplicationBusinessRules.Interfaces;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace InterfaceAdapters.Controllers
 {
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        private readonly IClientSession _session;
         private readonly IPaymentService _paymentService;
 
-        public PaymentController(IClientSession session, IPaymentService paymentService)
+        public PaymentController(IPaymentService paymentService)
         {
-            _session = session;
             _paymentService = paymentService;
         }
 
@@ -57,8 +55,6 @@ namespace InterfaceAdapters.Controllers
         [ApiExplorerSettings(GroupName = "v1")]
         public async Task<IActionResult> GetPayments([FromQuery] Payment payment)
         {
-            payment.ClientId = _session.GetClientId();
-
             var response = await this
                 ._paymentService
                 .GetPayments(payment);
@@ -84,8 +80,6 @@ namespace InterfaceAdapters.Controllers
         [ApiExplorerSettings(GroupName = "v1")]
         public async Task<IActionResult> CreatePayment([FromBody] Payment payment)
         {
-            payment.ClientId = this._session.GetClientId(); // Embryo of a simulation of a client id
-
             var response = await this
                 ._paymentService
                 .CreatePayment(payment);
@@ -127,6 +121,5 @@ namespace InterfaceAdapters.Controllers
 
             return Ok(response.GetResponse());
         }
-
     }
 }

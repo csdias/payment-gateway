@@ -1,4 +1,3 @@
-using InterfaceAdapters.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,9 +8,8 @@ namespace FrameworksAndDrivers.Web.Sessions
     public static class Setup
     {
         public static IServiceCollection AddFrameworksAndDriversWebSessions(this IServiceCollection services, IConfiguration configuration)
-        {             
-            return services
-                .AddScoped<IClientSession, ClientSession>();                
+        {
+            return services;
         }
 
         public static IApplicationBuilder UseFrameworksAndDriversWebSessions(this IApplicationBuilder app, 

@@ -5,6 +5,6 @@ namespace ApplicationBusinessRules.Interfaces
 {
     public interface ICreatePaymentUseCase
     {       
-        Task<Response<bool>> CreatePayment(Payment payment);
+        Task<Response<Payment>> CreatePayment(Payment payment);
     }
 }

@@ -6,7 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="6.5.1" />
+    <PackageReference Include="Amazon.Extensions.Configuration.SystemsManager" Version="3.0.0" />
+    <PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="7.0.1" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Serilog.Expressions" Version="3.3.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,8 +45,8 @@
   </ItemGroup>
 
    <ItemGroup>
-    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.2" />
-    <PackageReference Include="AspNetCore.HealthChecks.System" Version="6.0.4" />
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="3.1.1" />
+    <PackageReference Include="AspNetCore.HealthChecks.System" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>

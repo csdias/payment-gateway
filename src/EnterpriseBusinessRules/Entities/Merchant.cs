@@ -5,17 +5,21 @@ using EnterpriseBusinessRules.Interfaces;
 
 namespace EnterpriseBusinessRules.Entities
 {
-    public class Client: IEntity
+    public class Merchant: IEntity
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
+
         public string Name { get; set; }
+
         public string Email { get; set; }
+
         public string Password { get; set; }
-        public string Role { get; set; }
+
+        public string BankAccountDetails { get; set; }
 
         public ValidationResult Validate()
         {
-            ClientValidator validator = new ClientValidator();
+            MerchantValidator validator = new MerchantValidator();
             return validator.Validate(this);
         }
     }

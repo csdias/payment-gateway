@@ -41,10 +41,10 @@ namespace InterfaceAdapters.IntegrationTests.Controllers
         public async Task GetPayments_Should_BeOk()
         {
             // Arrange
-            var clientId = "xxxxx";
+            var merchantId = 1;
 
             // Act
-            var response = await _client.GetAsync($"v1/payments/{clientId}");
+            var response = await _client.GetAsync($"v1/payments/{merchantId}");
 
             // Assert
             var context = await response.Content.ReadAsStringAsync();

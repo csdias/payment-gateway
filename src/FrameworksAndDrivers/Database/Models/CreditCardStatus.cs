@@ -5,8 +5,8 @@ using FrameworksAndDrivers.Database.Attributes;
 namespace FrameworksAndDrivers.Database.Models
 {
     [Auditable]
-    [Table("payment-status", Schema = "payment")]
-    public class PaymentStatusModel
+    [Table("credit-card-status", Schema = "payment")]
+    public class CreditStatusModel
     {
         [Key]
         [Required]
