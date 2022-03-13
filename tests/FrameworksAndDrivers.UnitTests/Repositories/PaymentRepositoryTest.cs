@@ -49,7 +49,7 @@ namespace FrameworksAndDrivers.UnitTests.Repositories
             var repo = new PaymentRepository(_mockDbContext.Object, _mapper); //ToDo: Use a mock mapper
             var payment = new Payment
             {
-                ClientId = "A953DC88EB1B350CE0532C118C0A2285"
+                MerchantId = 1
             };
 
             // Act

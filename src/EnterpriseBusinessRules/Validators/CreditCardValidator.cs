@@ -12,6 +12,11 @@ namespace EnterpriseBusinessRules.Validators
                 .WithMessage("{PropertyName} is required")
                 .Length(2)
                 .WithMessage("{PropertyName} should have {Length} characters");
+            RuleFor(c => c.ExpirationYear)
+                .NotEmpty()
+                .WithMessage("{PropertyName} is required")
+                .Length(4)
+                .WithMessage("{PropertyName} should have {Length} characters");
             RuleFor(c => c.Cvv)
                 .NotEmpty()
                 .WithMessage("{PropertyName} is required")

@@ -1,12 +1,12 @@
 {
-  "name": "api-quotations",
+  "name": "payment-gateway-api",
   "version": "0.1.0",
   "scripts": {
     "start": "dotnet run --project ./src/FrameworksAndDrivers",
-    "clean": "dotnet clean POB.SRV0025.sln",
-    "restore": "dotnet restore POB.SRV0025.sln",
+    "clean": "dotnet clean PaymentGateway.sln",
+    "restore": "dotnet restore PaymentGateway.sln",
     "build": "npm run restore && dotnet publish -c Release -o out",
-    "test": "dotnet test POB.SRV0025.sln /p:Exclude=\"[*Test*]*%2c[*]*Migrations*%2c[*]*DbContext*%2c[*]*Startup*%2c[*]*Program*%2c[*]*Setup*%2c[*]*FrameworksAndDrivers.Web*\" /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutputFormat=lcov /p:CoverletOutput=coverage/ || npm run coverage && npm run report",
+    "test": "dotnet test PaymentGateway.sln /p:Exclude=\"[*Test*]*%2c[*]*Migrations*%2c[*]*DbContext*%2c[*]*Startup*%2c[*]*Program*%2c[*]*Setup*%2c[*]*FrameworksAndDrivers.Web*\" /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutputFormat=lcov /p:CoverletOutput=coverage/ || npm run coverage && npm run report",
     "coverage": "reportgenerator -reports:./tests/**/coverage.info -reporttypes:lcov -targetdir:./coverage",
     "migrate": "dotnet ef database update --project ./src/FrameworksAndDrivers --startup-project ./src/FrameworksAndDrivers",
     "migration": "dotnet ef migrations add InitialMigration --project ./src/FrameworksAndDrivers --startup-project ./src/FrameworksAndDrivers",

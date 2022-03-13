@@ -13,7 +13,7 @@ namespace ApplicationBusinessRules.UseCases
             _paymentRepository = paymentRepository;
         }
 
-        public async Task<Response<bool>> CreatePayment(Payment payment)
+        public async Task<Response<Payment>> CreatePayment(Payment payment)
         {
             return await _paymentRepository.CreatePayment(payment);
         }

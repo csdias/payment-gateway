@@ -3,8 +3,8 @@
 ## Cloning the project
 
 ```bash
-git clone https://tfs.prudentialdobrasil.com.br/tfs/WebSystem/POB.Services/_git/POB.SRV0025
-cd POB.SRV0025
+git clone https://github.com/csdias/payment-gateway
+cd PaymentGateway
 git pull
 ```
 

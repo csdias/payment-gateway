@@ -6,6 +6,7 @@ using FrameworksAndDrivers.Database.Models;
 using FrameworksAndDrivers.UnitTests.Helpers;
 using Xunit;
 using Xunit.Abstractions;
+using System;
 
 namespace FrameworksAndDrivers.UnitTests.Models
 {
@@ -50,18 +51,19 @@ namespace FrameworksAndDrivers.UnitTests.Models
         }
 
         [Theory]
-        [InlineData(256, "The field ClientId must be a string or array type with a maximum length of '255'.")]
-        [InlineData(0, "The ClientId field is required.")]
+        [InlineData("", 1, "","The field Currency must be a string or array type with a maximum length of '3'.")]
+        [InlineData("EUR", 0, "", "The MerchantId field is required.")]
         [Trait("Model", "Payment")]
         public void Should_ReturnErrorMessages_WhenPaymentIsInvalid(
-            int clientIdSize,
+            string currency, int merchantId, string guid,
             string expectedMessage)
         {
             // Arrange && Act
             var payment = new PaymentModel
             {
-                Id = TestHelpers.GenerateId(),
-                ClientId = TestHelpers.RandomString(clientIdSize)
+                Id = Guid.Parse(guid),
+                Currency = currency,
+                MerchantId = merchantId
             };
 
             // Assert

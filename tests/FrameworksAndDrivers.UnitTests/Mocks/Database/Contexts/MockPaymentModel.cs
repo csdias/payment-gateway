@@ -11,26 +11,23 @@ namespace FrameworksAndDrivers.UnitTests.Mocks.Database.Contexts
             new PaymentModel
             {
                 Id = Guid.Parse("fc782e65-0117-4c5e-b6d0-afa845effa3e"),
-                ClientId = "A953DC88EB1B350CE0532C118C0A2285",
-                CreditCard = new Dictionary<string, object>() {
-                    {"name", "CARLOS SOARES DIAS"},
-                    {"expiration-month", 12},
-                    {"expiration-year", 2028}
+                MerchantId = 1,
+                CreditCardId = 1,
+                CreditCard = new CreditCardModel()
+                {
+                    Id = 1,
+                    Number = "379354508162306",
+                    HolderName = "Antônio J. Penteado",
+                    HolderAddress = "Heroic St. 195",
+                    ExpirationMonth = "12",
+                    ExpirationYear = "2025",
+                    Cvv = "323",
+                    StatusId = 1
                 },
-                Ammount = 1_272.50m,
+                Amount = 15.99m,
+                Currency = "EUR",
+                SaleDescription = "Final soccer match",
                 StatusId = 1
-            },
-            new PaymentModel
-            {
-                Id = Guid.Parse("a114b1d6-1d17-401d-a6e7-4c696e15b596"),
-                ClientId = "A953DC88EB1B350CE0532C118C0A2285",
-                CreditCard = new Dictionary<string, object>() {
-                    {"name", "JHON SMITH"},
-                    {"expiration-month", 07},
-                    {"expiration-year", 2025}
-                },
-                Ammount = 3_422.70m,
-                StatusId = 2
             }
         };
     }

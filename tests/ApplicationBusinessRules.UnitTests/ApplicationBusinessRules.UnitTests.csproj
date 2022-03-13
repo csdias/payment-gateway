@@ -24,4 +24,8 @@
     <ProjectReference Include="..\EnterpriseBusinessRules.UnitTests\EnterpriseBusinessRules.UnitTests.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mocks\Services\" />
+  </ItemGroup>
+
 </Project>

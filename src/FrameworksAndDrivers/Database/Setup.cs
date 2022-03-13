@@ -30,8 +30,7 @@ namespace FrameworksAndDrivers.Database
         }
 
         public static void Seed(this ModelBuilder modelBuilder)
-        {
-            
+        {            
         }
     }
 }

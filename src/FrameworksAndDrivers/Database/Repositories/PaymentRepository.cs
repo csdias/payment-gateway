@@ -53,7 +53,7 @@ namespace FrameworksAndDrivers.Database.Repositories
             try
             {
                 var pays = await this._dbContext.Payments.AsNoTracking()
-                    .Where(item => item.ClientId == payment.ClientId)
+                    .Where(item => item.MerchantId == payment.MerchantId)
                     .FirstOrDefaultAsync();
                 if (pays == null)
                 {
@@ -73,11 +73,11 @@ namespace FrameworksAndDrivers.Database.Repositories
             }
         }
 
-        public async Task<Response<bool>> CreatePayment(Payment payment)
+        public async Task<Response<Payment>> CreatePayment(Payment payment)
         {
             try
             {  
-                var validate = ValidatorHelper.ValidateEntity<bool>(payment);
+                var validate = ValidatorHelper.ValidateEntity<Payment>(payment);
                 if(validate.HasErrors()) {
                     return validate;
                 }
@@ -85,13 +85,13 @@ namespace FrameworksAndDrivers.Database.Repositories
                     this._mapper.Map<PaymentModel>(payment)
                 );
                 await _dbContext.SaveChangesAsync();
-                return new Response<bool>()
+                return new Response<Payment>()
                     .SetSuccess(true)
-                    .SetResponse(true);
+                    .SetResponse(payment);
             }
             catch (Exception exception)
             {
-                return new Response<bool>()
+                return new Response<Payment>()
                     .SetException(exception);
             }
         }

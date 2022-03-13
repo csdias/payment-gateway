@@ -5,16 +5,15 @@ using FrameworksAndDrivers.Database.Attributes;
 namespace FrameworksAndDrivers.Database.Models
 {
     [Auditable]
-    [Table("payment-status", Schema = "payment")]
-    public class PaymentStatusModel
+    [Table("merchant", Schema = "payment")]
+    public class MerchantModel
     {
         [Key]
-        [Required]
         [Column("id")]
-        public short Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
-        [Column("status")]
-        public string Status { get; set; } 
+        [Column("bank-account-details")]
+        public string BankAccountDetails { get; set; }
     }
 }
