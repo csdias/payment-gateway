@@ -8,7 +8,6 @@ namespace EnterpriseBusinessRules.Validators
         public LoginValidator()
         {
             RuleFor(c => c.Email)
-                .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull().WithMessage("{PropertyName} is required")
                 .EmailAddress().WithMessage("{PropertyName} is invalid");
                 

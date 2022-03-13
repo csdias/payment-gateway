@@ -1,17 +1,14 @@
-using YamlDotNet.Serialization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Reflection;
-using System;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace FrameworksAndDrivers.Web.Swagger
 {
     public static class Setup
     {
+        public static IServiceCollection AddFrameworksAndDriversWebSwagger(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSwaggerGen(opts =>
             {
@@ -19,8 +16,6 @@ namespace FrameworksAndDrivers.Web.Swagger
             });
 
             return services;
-        {     
-            return services;              
         }
 
         public static IApplicationBuilder UseFrameworksAndDriversWebSwagger(this IApplicationBuilder app,

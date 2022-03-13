@@ -1,0 +1,240 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "dotnet-lambda/5.3.0": {
+        "dependencies": {
+          "AWSSDK.CloudFormation": "3.7.0.2",
+          "AWSSDK.IdentityManagement": "3.7.1",
+          "AWSSDK.Lambda": "3.7.4",
+          "AWSSDK.S3": "3.7.0.3",
+          "Amazon.Common.DotNetCli.Tools": "1.0.0",
+          "Newtonsoft.Json": "12.0.3",
+          "YamlDotNet.Signed": "5.2.1"
+        },
+        "runtime": {
+          "dotnet-lambda.dll": {}
+        }
+      },
+      "AWSSDK.CloudFormation/3.7.0.2": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.3.13"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.CloudFormation.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.0.2"
+          }
+        }
+      },
+      "AWSSDK.Core/3.7.3.13": {
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.3.13"
+          }
+        }
+      },
+      "AWSSDK.ECR/3.7.0.2": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.3.13"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.ECR.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.0.2"
+          }
+        }
+      },
+      "AWSSDK.IdentityManagement/3.7.1": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.3.13"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.IdentityManagement.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.1.0"
+          }
+        }
+      },
+      "AWSSDK.Lambda/3.7.4": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.3.13"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Lambda.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.4.0"
+          }
+        }
+      },
+      "AWSSDK.S3/3.7.0.3": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.3.13"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.S3.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.0.3"
+          }
+        }
+      },
+      "AWSSDK.SecurityToken/3.7.1.15": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.3.13"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.SecurityToken.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.1.15"
+          }
+        }
+      },
+      "AWSSDK.SSO/3.7.0.26": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.3.13"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.SSO.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.0.26"
+          }
+        }
+      },
+      "AWSSDK.SSOOIDC/3.7.0.26": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.3.13"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.SSOOIDC.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.0.26"
+          }
+        }
+      },
+      "Newtonsoft.Json/12.0.3": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.3.23909"
+          }
+        }
+      },
+      "YamlDotNet.Signed/5.2.1": {
+        "runtime": {
+          "lib/netstandard1.3/YamlDotNet.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.2.1.0"
+          }
+        }
+      },
+      "Amazon.Common.DotNetCli.Tools/1.0.0": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.3.13",
+          "AWSSDK.ECR": "3.7.0.2",
+          "AWSSDK.IdentityManagement": "3.7.1",
+          "AWSSDK.S3": "3.7.0.3",
+          "AWSSDK.SSO": "3.7.0.26",
+          "AWSSDK.SSOOIDC": "3.7.0.26",
+          "AWSSDK.SecurityToken": "3.7.1.15"
+        },
+        "runtime": {
+          "Amazon.Common.DotNetCli.Tools.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "dotnet-lambda/5.3.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AWSSDK.CloudFormation/3.7.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XJZmYc+ghc03xqwutUgk+7gKhrHz1+GJen8Zd36b/vb6Y0hGns+xOA8qWn/R3K8hNPOKO+J0wfzpa9JwfAMxKg==",
+      "path": "awssdk.cloudformation/3.7.0.2",
+      "hashPath": "awssdk.cloudformation.3.7.0.2.nupkg.sha512"
+    },
+    "AWSSDK.Core/3.7.3.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ipYB3Vo/Lw3f5+d5qm3ka5JziNT3f3eLlyhGtbWdYoVloGvdyNRyV22FbZ63Ph43aCC2SgXIgQfLkIAkNu7ySA==",
+      "path": "awssdk.core/3.7.3.13",
+      "hashPath": "awssdk.core.3.7.3.13.nupkg.sha512"
+    },
+    "AWSSDK.ECR/3.7.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ip+sMH+TtiP6kPvwJt3zBSge432JHJiaogg6x9lV/ZUg76f7NBFEhJcEUE/CMFxU/kD66VPt6MaH0RUM5pMgkA==",
+      "path": "awssdk.ecr/3.7.0.2",
+      "hashPath": "awssdk.ecr.3.7.0.2.nupkg.sha512"
+    },
+    "AWSSDK.IdentityManagement/3.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hNCnjYUTDdm/NcqGoS9BX8meVLZvWSRjAYD4oB0XHFBqA7WOgxPZXHj2Vb71VQIR5kjnBQmoNpAVpy5rswTdCg==",
+      "path": "awssdk.identitymanagement/3.7.1",
+      "hashPath": "awssdk.identitymanagement.3.7.1.nupkg.sha512"
+    },
+    "AWSSDK.Lambda/3.7.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zCCjlbfjrMyRGkVbyPKCQt863DkaNTAl/hjyJ0oPZqpC8mHRxG0VmQ1l31i3kpmLjwZGpMySpPNh9RqlPYUBgg==",
+      "path": "awssdk.lambda/3.7.4",
+      "hashPath": "awssdk.lambda.3.7.4.nupkg.sha512"
+    },
+    "AWSSDK.S3/3.7.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v+2oAzNAzgtsQh9mXiagtHtHO4BGq1Fu3JVPpOys5pyXIY1eKi/AFPH266RqeWCbGtXE5melUUHgYNMZeL43Gg==",
+      "path": "awssdk.s3/3.7.0.3",
+      "hashPath": "awssdk.s3.3.7.0.3.nupkg.sha512"
+    },
+    "AWSSDK.SecurityToken/3.7.1.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1aoujDWGaHdqIHRhYEd/QP5KdI1AUTScnWtKSG0AFLuLApYQ8xerJO9+awGn2mAflHVVn1duL954FXfTLQC9/A==",
+      "path": "awssdk.securitytoken/3.7.1.15",
+      "hashPath": "awssdk.securitytoken.3.7.1.15.nupkg.sha512"
+    },
+    "AWSSDK.SSO/3.7.0.26": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Vd/HQu1DjAWtGbLDCA9kLZ66Ok4MqXxJnmBnCoHFX+Fvhoq6FXqeeW+X9ACeyK7POOmMlGi5axUxHJBbmp4RZA==",
+      "path": "awssdk.sso/3.7.0.26",
+      "hashPath": "awssdk.sso.3.7.0.26.nupkg.sha512"
+    },
+    "AWSSDK.SSOOIDC/3.7.0.26": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-F1ozzw+4fipxKsMYxgWgB5ZQAs9uAVReLZarDTAGoQjyO1w+eKLDbdQCsWyYP/j35hk9MT4PSo/FsFXvNATVdQ==",
+      "path": "awssdk.ssooidc/3.7.0.26",
+      "hashPath": "awssdk.ssooidc.3.7.0.26.nupkg.sha512"
+    },
+    "Newtonsoft.Json/12.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
+    "YamlDotNet.Signed/5.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8eQmzaQjSnWEXaUT72ylWUkD/ESbv1n4XTqFeK4/K8SIzjScG64iYl9rYgmoFEEu6d9WhnePY5lYaRmAztdhAg==",
+      "path": "yamldotnet.signed/5.2.1",
+      "hashPath": "yamldotnet.signed.5.2.1.nupkg.sha512"
+    },
+    "Amazon.Common.DotNetCli.Tools/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -17,7 +17,9 @@ namespace ApplicationBusinessRules
                 .AddEnterpriseBusinessRules(configuration)
                 .AddScoped<IGetPaymentUseCase, GetPaymentUseCase>()
                 .AddScoped<ICreatePaymentUseCase, CreatePaymentUseCase>()
-                .AddScoped<IUpdatePaymentStatusUseCase, UpdatePaymentStatusUseCase>()             
+                .AddScoped<IUpdatePaymentStatusUseCase, UpdatePaymentStatusUseCase>()
+                .AddScoped<IValidateCreditCardUseCase, ValidateCreditCardUseCase>()
+                .AddScoped<IPaymentQueueProcessorService, PaymentQueueProcessorService>()
                 .AddScoped<IPaymentService, PaymentService>();
         }
 

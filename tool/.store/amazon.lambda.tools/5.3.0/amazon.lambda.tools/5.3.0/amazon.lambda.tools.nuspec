@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Amazon.Lambda.Tools</id>
+    <version>5.3.0</version>
+    <authors>Amazon Web Services</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="file">LICENSE</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <icon>icon.png</icon>
+    <projectUrl>https://github.com/aws/aws-extensions-for-dotnet-cli</projectUrl>
+    <description>Amazon.Lambda.Tools adds commands to the dotnet cli to deploy AWS Lambda functions.</description>
+    <copyright>Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.</copyright>
+    <tags>AWS Amazon Lambda</tags>
+    <packageTypes>
+      <packageType name="DotnetTool" />
+    </packageTypes>
+    <contentFiles>
+      <files include="any/net6.0/Resources/build-lambda-zip.exe" buildAction="Content" />
+      <files include="any/netcoreapp3.1/Resources/build-lambda-zip.exe" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+</package>
