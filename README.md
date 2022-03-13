@@ -8,7 +8,7 @@ It applies good practices, uses clean architecture and can be hosted in the clou
 
 Environment options: 
 On Amazon Cloud through Terraform
-On premisses through Docker [deprecated]
+On premisses through Docker (deprecated)
 
 ## AWS Environment
 Amazon Resources Created Using Terraform
