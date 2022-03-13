@@ -4,7 +4,7 @@ Api that allows merchants to charge its customers through credit card transactio
 ## About
 This is a study purpose project.
 
-It applies good practices, uses clean architecture and can be host in the cloud
+It applies good practices, uses clean architecture and can be hosted in the cloud
 
 Environment options: 
 On Amazon Cloud through Terraform
