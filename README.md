@@ -1,5 +1,5 @@
 # Payment Gateway Api
-Api that allows merchants to complete credit card transactions.
+Api that allows merchants to charge its customers through credit card transactions.
 
 ## About
 This is a study purpose project.
