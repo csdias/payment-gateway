@@ -8,12 +8,12 @@ it uses message queue pattern and it is hosted in the cloud for high availabilit
 ![clean_architecture](https://user-images.githubusercontent.com/16576809/158211294-48b0d242-a61a-4d99-a33f-6976e2017681.jpg)
 
 ## Mechanism
-There is a main lambda that exposes an api that receives payment orders and writes them in an aurora postgres. This api is meant to be used by the merchants.
-The main lambda saves the payment order and return a transcation id so that the merchants can track the status of payment orders in a future time when it is done processing.
-The main lambda publishes a message in a sns topic so that the credit analysis will be decoupled and scalable.
+There is a payment lambda that exposes an api that receives payment orders and writes them in an aurora postgres. This api is meant to be used by the merchants.
+The payment lambda saves the payment order and returns a transcation id so that the merchants can track the status of payment orders in a future time when it is done processing.
+The payment lambda publishes a message in a sns topic so that the credit analysis will be decoupled and scalable.
 A queue subscribes to this sns topic.
 A queue processor lambda is hooked up to this queue.
-The queue processor lambda process each new queue, by unwrapping the message, and calling the CkoBankSimulator and updating the the payment order status with the CkoBankSimulator response.
+The queue processor lambda process each new queue item, by unwrapping the message, and calling the CkoBankSimulator and updating the the payment order status with the CkoBankSimulator response.
 
 ## AWS Environment
 Amazon Resources Created Using Terraform
@@ -24,7 +24,7 @@ Amazon Resources Created Using Terraform
 - 1 Internet Gateway attached to the vpc.
 - 1 Private route table and 1 public route table.
 - 1 NAT Gateway.
-- 1 Main lambda function of proxy type
+- 1 Payment lambda function of proxy type
 - 1 Lambda role with permission to execution inside the vpc to increase availability.
 - 1 Http Api Gateway of proxy type and lambda integration.
 - 1 subnet group attaching the two public subnets to increase availability and using the vcp security group to allow postgress to be connected exernally.
@@ -32,7 +32,7 @@ Amazon Resources Created Using Terraform
 - 1 Rds postgres
 - 1 Sns topic that will receive payment orders.
 - 1 Sqs that will subscribe to the payment orders topic.
-- 1 second lambda attached to the Sqs to process the queue itens, then call the https://get.mocklab.io/ to simulate the CkoBankSimulator, then update the 
+- 1 Quee processor lambda attached to the Sqs to process the queue items, then call the https://get.mocklab.io/ to simulate the CkoBankSimulator, then update the 
 payment status with the CkoBankSimulator response.
 
 ![aws-infra](https://user-images.githubusercontent.com/16576809/158211364-b6906090-d2ee-4551-9fcb-2ef1a96a3ccb.png)
@@ -121,3 +121,4 @@ add the sns topic
 add the sqs 
 add the queue processor lambda
  
+Reavaluate the possiblity to refactor the payment lambda to use mediator pattern instead of simple dependency injection and to use rest api gateway with dedicated routes and dedicated micro lambda functions.
