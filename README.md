@@ -28,7 +28,7 @@ Amazon Resources Created Using Terraform
 - 1 Payment lambda function of proxy type
 - 1 Lambda role with permission to execution inside the vpc to increase lambda availability.
 - 1 Http Api Gateway of proxy type and lambda integration.
-- 1 subnet group attaching the two public subnets to increase postgres availability and using the vcp security group to allow postgress to be connected exernally.
+- 1 Subnet group attaching the two public subnets to increase postgres availability and using the vcp security group to allow postgress to be connected exernally.
 - 1 Outbound rule to allow postgres to be connected externally so that we can migrate data.
 - 1 Rds postgres
 - 1 Sns topic that will receive payment orders.
