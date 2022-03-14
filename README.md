@@ -125,8 +125,11 @@ To destroy everything and stop incorring in costs
 
 # What is done and what needs to be done:
 
-The solution with the payment lambda and its tests are building without errors. More test scenarios are required. When running locally (a postgres installation is needed, or a docker installation with a postgres image) the payment lambda is already able to receive the payment orders, write them on postgres and then return a transaction id to the merchants so that the payment order status can be checked in the future using the the same api.
+The solution with the payment lambda and its tests are building without errors. More test scenarios are required. When running locally (a postgres installation is needed, or a docker installation with a postgres image) the payment lambda exposes an api in which the routes are in place to alow creating payment orders (POST), check payment order statuses (GET), find all payments given a merchant id (GET), update a payment order (PUT).
+<br/>
+When the POST method is called, the payment lambda saves the payment order in postgres and then return a transaction id to the merchants so that the payment order status can be checked in the future using the the same api method GET
 
+<br/>
 The terraform is already working and deploying to an Aws account.
 
 Needs to be done:
