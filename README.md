@@ -142,12 +142,12 @@ Create more routes in the https://get.mocklab.io/ to enrich the CkoBankSimulator
 
 
 In terraform configuration is necessary to
-add the aurora postgres with the correct outbound rule to allow migrations and pgAdmin
-add a s3 bucket to receive the zipped lambda assemblies.
-add the payment lambda 
-add the sns topic
-add the sqs 
-add the queue processor lambda
+<br/>add the aurora postgres with the correct outbound rule to allow migrations and pgAdmin.
+<br/>add a s3 bucket to receive the zipped lambda assemblies.
+<br/>add the payment lambda resource.
+<br/>add the sns topic resource.
+<br/>add the sqs resource.
+<br/>add the queue processor lambda resource.
  
 Refactoring possibilities:
 <br/>Modifying the payment lambda to use mediator pattern instead of simple dependency injection.
