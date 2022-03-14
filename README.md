@@ -104,8 +104,7 @@ Install the Amazon Lambda Tools
 ```
   dotnet tool install -g Amazon.Lambda.Tools
 ```
-Build the solution
-Right click on Buils.ps1 and run with PowerShell
+Build the solution riight clickiclick on Buils.ps1 and runnint it with PowerShell
 
 Instead of the previous step it is possible to create a zipped artifact to be deployed to Amazon Cloud with a dotnet lambda cli command
 ```
