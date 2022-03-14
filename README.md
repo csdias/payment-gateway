@@ -10,7 +10,7 @@ it uses message queue pattern and it is hosted in the cloud for high availabilit
 
 ## Mechanism
 There is a payment lambda that exposes an api that receives payment orders and writes them in an aurora postgres. This api is meant to be used by the merchants.
-The payment lambda saves the payment order and returns a transcation id so that the merchants can track the status of payment orders in a future time when it is done processing.
+The payment lambda saves the payment order and returns a transaction id so that the merchants can track the status of payment orders in a future time when it is done processing.
 The payment lambda publishes a message in a sns topic so that the credit analysis will be decoupled and scalable.
 A queue subscribes to this sns topic.
 A queue processor lambda is hooked up to this queue.
