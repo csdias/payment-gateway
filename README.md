@@ -120,7 +120,6 @@ Type yes when questioned if you agree to deploy to Amazon Cloud (there might be 
 To destroy everything and stop incorring in costs
 ```
   terraform destroy
-
 ```
 
 # What is done:
