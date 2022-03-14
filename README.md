@@ -123,25 +123,27 @@ To destroy everything and stop incorring in costs
 
 ```
 
-# What is done and what needs to be done:
+# What is done:
 
-The solution with the payment lambda and its tests are building without errors. More test scenarios are required. When running locally (a postgres installation is needed, or a docker installation with a postgres image) the payment lambda exposes an api in which the routes are in place to alow creating payment orders (POST), checking payment order statuses (GET), finding all payments given a merchant id (GET) and updating a payment order (PUT).
+The solution with the payment lambda and its tests are building without errors.When running locally (a postgres installation is needed, or a docker installation with a postgres image) the payment lambda exposes an api in which the routes are in place to alow creating payment orders (POST), checking payment order statuses (GET), finding all payments given a merchant id (GET) and updating a payment order (PUT).
 <br/>
 When the POST method is called, the payment lambda saves the payment order in postgres and then returns a transaction id to the merchants so that the payment order status can be checked in the future using the the same api method GET.
-<br/> More validation scenarios are required and can be done by just adding rules in the Fluent Validation structure.
 
 <br/>
 The terraform is already working and deploying to an Aws account.
 
-Needs to be done:
+# What needs to be done:
+<br/> Add more validation scenarios. That can be done by just adding rules in the Fluent Validation structure.
+<br/> Add more test scenarios. That can be done by just adding more method tests.
+<br/> Fix integrations tests and verify how to test the lambdas.
 <br/>
-Create a new project for the queue processor lambda.
+Create a new dotnet project for the queue processor lambda.
 Make this queue processor lambda call the CkoBankSimulator (exernal url https://get.mocklab.io/) and update a payment order with the response.
 Create the tests for the queue processor lambda.
-Create more routes in the https://get.mocklab.io/ to enrich the CkoBankSimulator test scenarios.
+Create more routes in the mocklab to enrich the CkoBankSimulator test scenarios.
 
-
-In terraform configuration is necessary to
+<br/>
+In terraform:
 <br/>add the aurora postgres with the correct outbound rule to allow migrations and pgAdmin.
 <br/>add a s3 bucket to receive the zipped lambda assemblies.
 <br/>add the payment lambda resource.
