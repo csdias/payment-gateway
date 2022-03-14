@@ -26,9 +26,9 @@ Amazon Resources Created Using Terraform
 - 1 Private route table and 1 public route table.
 - 1 NAT Gateway.
 - 1 Payment lambda function of proxy type
-- 1 Lambda role with permission to execution inside the vpc to increase availability.
+- 1 Lambda role with permission to execution inside the vpc to increase lambda availability.
 - 1 Http Api Gateway of proxy type and lambda integration.
-- 1 subnet group attaching the two public subnets to increase availability and using the vcp security group to allow postgress to be connected exernally.
+- 1 subnet group attaching the two public subnets to increase postgres availability and using the vcp security group to allow postgress to be connected exernally.
 - 1 Outbound rule to allow postgres to be connected externally so that we can migrate data.
 - 1 Rds postgres
 - 1 Sns topic that will receive payment orders.
@@ -122,4 +122,6 @@ add the sns topic
 add the sqs 
 add the queue processor lambda
  
-Reavaluate the possiblity to refactor the payment lambda to use mediator pattern instead of simple dependency injection and to use rest api gateway with dedicated routes and dedicated micro lambda functions.
+Reavaluate the possiblity to:
+Tefactor the payment lambda to use mediator pattern instead of simple dependency injection.
+Use a rest api gateway instead of a http api gateway proxy. the idea being having dedicated routes and dedicated micro lambda functions.
