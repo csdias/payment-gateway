@@ -49,11 +49,11 @@ payment status with the CkoBankSimulator response.
 Download Terraform and Intall. => https://www.terraform.io/downloads
 
 - Setup Environment Variables via `export` command or via `appsettings.json` file on the src/InterfaceAdapters path of the repo
-- DotNet cli (Core SDK)
-- DotNet 3.1+
-- Node.js v8+
-- Npm v6+
-- Yarn v1.21+
+- DotNet 6 Cli (Core SDK)
+- DotNet 6
+- Node.js (maybe with chocolatey, depending on you)
+- Npm
+- Yarn
 - Amazon Lambda Tools
 
 ### Install dependencies
