@@ -37,7 +37,8 @@ Amazon Resources Created Using Terraform
 payment status with the CkoBankSimulator response.
 
 ![aws-infra](https://user-images.githubusercontent.com/16576809/158211364-b6906090-d2ee-4551-9fcb-2ef1a96a3ccb.png)
-(actually in our case it is slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda)
+
+<br/>(actually in our case it is slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda)
 
 
 ## Environment Variables
