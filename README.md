@@ -120,7 +120,7 @@ install it from https://www.terraform.io/downloads.
 ```
 Type yes when questioned if you agree to deploy to Amazon Cloud (there might be costs applied by Amazon AWS)
 
-To destroy everything and stop incorring in costs
+To destroy everything and stop incurring costs
 ```
   terraform destroy
 ```
