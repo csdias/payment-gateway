@@ -146,6 +146,6 @@ add the sns topic
 add the sqs 
 add the queue processor lambda
  
-Reavaluate the possiblity to:
-Tefactor the payment lambda to use mediator pattern instead of simple dependency injection.
-Use a rest api gateway instead of a http api gateway proxy. the idea being having dedicated routes and dedicated micro lambda functions.
+Refactoring possibilities:
+<br/>Modifying the payment lambda to use mediator pattern instead of simple dependency injection.
+<br/>Use a rest api gateway instead of a http api gateway proxy. The idea being having dedicated routes and dedicated lighter and faster lambda functions.
