@@ -138,6 +138,8 @@ Needs to be done:
 Create a new project for the queue processor lambda.
 Make this queue processor lambda call the CkoBankSimulator (exernal url https://get.mocklab.io/) and update a payment order with the response.
 Create the tests for the queue processor lambda.
+Create more routes in the https://get.mocklab.io/ to enrich the CkoBankSimulator scenarios.
+
 
 In terraform configuration is necessary to
 add the aurora postgres with the correct outbound rule to allow migrations and pgAdmin
