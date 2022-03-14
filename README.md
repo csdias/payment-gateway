@@ -78,8 +78,8 @@ Use the Payment Transation fc782e65-0117-4c5e-b6d0-afa845effa3e in the GET metho
 
 ### Deploying to Cloud
 
-Change the database connection to point to a AWS Postgres endpoint, for example: 
-<br/>  "DATABASE_CONNECTION_STRING": "Host=paymentgateway.cluster-ckpfmgmjaul2.eu-west-2.rds.amazonaws.com;Port=5432;Pooling=true;Database=PaymentGateway;User Id=postgres;Password=cJygMfXc1CbQpQ0bByPe;",
+Change the "DATABASE_CONNECTION_STRING" to point to an AWS Postgres endpoint, for example: 
+<br/>"Host=paymentgateway.cluster-ckpfmgmjaul2.eu-west-2.rds.amazonaws.com;Port=5432;Pooling=true;Database=PaymentGateway;User Id=postgres;Password=cJygMfXc1CbQpQ0bByPe;",
 
 
 Install the Entity Framework Tools
