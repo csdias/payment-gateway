@@ -14,7 +14,7 @@ The payment lambda saves the payment order and returns a transaction id so that 
 The payment lambda publishes a message in a sns topic so that the credit analysis is decoupled and scalable.
 A queue subscribes to this sns topic.
 A queue processor lambda is hooked up to this queue.
-The queue processor lambda process each new queue item by unwrapping the message, calling the CkoBankSimulator and updating the the payment order status with the CkoBankSimulator response.
+The queue processor lambda process each new queue item by unwrapping the the payload from message, calling the CkoBankSimulator with the payment payload and updating the the payment order status with the CkoBankSimulator response.
 
 ## AWS Environment
 Amazon Resources Created Using Terraform
