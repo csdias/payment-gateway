@@ -150,6 +150,7 @@ In terraform:
 <br/>add the sqs resource.
 <br/>add the queue processor lambda resource.
  
-Refactoring possibilities:
+Improving possibilities:
+<br>Adding authentication.
 <br/>Modifying the payment lambda to use mediator pattern instead of simple dependency injection.
-<br/>Use a rest api gateway instead of a http api gateway proxy. The idea being having dedicated routes and dedicated lighter and faster lambda functions.
+<br/>Using a rest api gateway instead of a http api gateway proxy. The idea being having dedicated routes and dedicated lighter and faster lambda functions.
