@@ -70,6 +70,8 @@ You can check the results on the prompt or open the coverage folder, inside it, 
 
 ### Running locally
 
+First install postgres https://www.postgresql.org/download/ or docker with a postgres image https://www.docker.com/products/docker-desktop
+
 Open the solution and press F5
 
 Use the Payment Transation fc782e65-0117-4c5e-b6d0-afa845effa3e in the GET method
@@ -107,7 +109,7 @@ To destroy everything and stop incorring in costs
 
 # What is done and what needs to be done:
 
-The solution builds and when it is running locally (for this a postgres installation is needed) is already able to receive payment orders write them on postgres and return a transaction id to be searched in a future time in the same api.
+The solution builds and when it is running locally (for this a postgres installation is needed, or a docker installation with a postgres image) is already able to receive payment orders write them on postgres and return a transaction id to be searched in a future time in the same api.
 
 The terraform is already working and deploying to an Aws account.
 
