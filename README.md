@@ -77,6 +77,21 @@ Open the solution and press F5
 Use the Payment Transation fc782e65-0117-4c5e-b6d0-afa845effa3e in the GET method
 
 ### Deploying to Cloud
+
+Change the database connection to point to a AWS Postgres endpoint, for example: 
+<br/>  "DATABASE_CONNECTION_STRING": "Host=paymentgateway.cluster-ckpfmgmjaul2.eu-west-2.rds.amazonaws.com;Port=5432;Pooling=true;Database=PaymentGateway;User Id=postgres;Password=cJygMfXc1CbQpQ0bByPe;",
+
+
+Install the Entity Framework Tools
+```
+  dotnet tool install --global dotnet-ef 
+```
+
+Run the ef database update command
+```
+  dotnet ef database update  
+```
+
 Install the Amazon Lambda Tools
 ```
   dotnet tool install -g Amazon.Lambda.Tools
@@ -109,13 +124,15 @@ To destroy everything and stop incorring in costs
 
 # What is done and what needs to be done:
 
-The solution builds and when it is running locally (for this a postgres installation is needed, or a docker installation with a postgres image) is already able to receive payment orders write them on postgres and return a transaction id to be searched in a future time in the same api.
+The solution with the payment lambda and its tests are building without errors. More test scenarios are required. When running locally (a postgres installation is needed, or a docker installation with a postgres image) the payment lambda is already able to receive the payment orders, write them on postgres and then return a transaction id to the merchants so that the payment order status can be checked in the future using the the same api.
 
 The terraform is already working and deploying to an Aws account.
 
 Needs to be done:
+<br/>
 Create a new project for the queue processor lambda.
 Make this queue processor lambda call the CkoBankSimulator (exernal url https://get.mocklab.io/) and update a payment order with the response.
+Create the tests for the queue processor lambda.
 
 In terraform configuration is necessary to
 add the aurora postgres with the correct outbound rule to allow migrations and pgAdmin
