@@ -86,6 +86,7 @@ Create a zipped artifact to be deployed to Amazon Cloud
 ```
 
 Pre-Requisites to create an infrastructure on AWS using Terraform
+<br/>
 It is required AWS IAM API keys (access key and secret key) for creating and deleting permissions for all 
 AWS resources. Terraform should be installed on the machine. If Terraform does not exist you can download and 
 install it from https://www.terraform.io/downloads.
