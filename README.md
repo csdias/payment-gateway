@@ -24,7 +24,7 @@ Amazon Resources Created Using Terraform
 - 2 Private subnets.
 - 1 Internet Gateway attached to the vpc.
 - 1 Private route table and 1 public route table.
-- 1 NAT Gateway with an elastica ip
+- 1 NAT Gateway with an elastic ip
 - 1 Payment lambda function of proxy type
 - 1 Lambda role with permission to execution inside the vpc to increase lambda availability.
 - 1 Http Api Gateway of proxy type and lambda integration.
