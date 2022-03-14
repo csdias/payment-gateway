@@ -3,7 +3,7 @@ Api that allows merchants to charge their customers through credit card transact
 
 ## About
 This is a study purpose project only.
-The idea is to apply modern standards and good practices, for example, it is build using clean architecture, it uses some concepts of microservices,
+The idea is to apply modern standards and good practices, for example, it's built using clean architecture, it uses some concepts of microservices,
 it uses message queue pattern and it is hosted in the cloud for high availability and scalability.
 
 ![clean_architecture](https://user-images.githubusercontent.com/16576809/158211294-48b0d242-a61a-4d99-a33f-6976e2017681.jpg)
