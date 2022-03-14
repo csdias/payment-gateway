@@ -99,3 +99,22 @@ To destroy everything and stop incorring in costs
   terraform destroy
 
 ```
+
+# What is done and what needs to be done:
+
+The solution builds and when it is running locally (for this a postgres installation is needed) is already able to receive payment orders write them on postgres and return a transaction id to be searched in a future time in the same api.
+
+The terraform is already working and deploying to an Aws account.
+
+Needs to be done:
+Create a new project for the queue processor lambda.
+Make this queue processor lambda call the CkoBankSimulator (exernal url https://get.mocklab.io/) and update a payment order with the response.
+
+In terraform configuration is necessary to
+add the aurora postgres with the correct outbound rule to allow migrations and pgAdmin
+add a s3 bucket to receive the zipped lambda assemblies.
+add the payment lambda 
+add the sns topic
+add the sqs 
+add the queue processor lambda
+ 
