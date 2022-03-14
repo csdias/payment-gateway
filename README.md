@@ -5,6 +5,7 @@ Api that allows merchants to charge their customers through credit card transact
 This is a study purpose project only.
 The idea is to apply modern standards and good practices, fo example, it is build using clean architecture, it uses some concepts of microservices,
 it uses message queue pattern and it is hosted in the cloud for high availability and scalability.
+![clean_architecture](https://user-images.githubusercontent.com/16576809/158211294-48b0d242-a61a-4d99-a33f-6976e2017681.jpg)
 
 ## Mechanism
 There is a main lambda that exposes an api that receives payment orders and writes them in an aurora postgres. This api is meant to be used by the merchants.
@@ -33,6 +34,8 @@ Amazon Resources Created Using Terraform
 - 1 Sqs that will subscribe to the payment orders topic.
 - 1 second lambda attached to the Sqs to process the queue itens, then call the https://get.mocklab.io/ to simulate the CkoBankSimulator, then update the 
 payment status with the CkoBankSimulator response.
+
+![aws-infra](https://user-images.githubusercontent.com/16576809/158211364-b6906090-d2ee-4551-9fcb-2ef1a96a3ccb.png)
 
 ## Environment Variables
 
