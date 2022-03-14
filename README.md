@@ -54,12 +54,12 @@ payment status with the CkoBankSimulator response.
 - .NET 6 SDK https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 - Entity Framework Core Tools for the .NET Command-Line Interface.
 ```
-  dotnet tool install --global dotnet-ef)
+  dotnet tool install --global dotnet-ef
 ```
 - Node.js 16.14.0+ and Npm 16.0.0+ (optional Chocolatey) https://nodejs.org/en/download/
 - Amazon Lambda Tools 5.3.0
 ```
-  dotnet tool install --global Amazon.Lambda.Tools --version 5.3.0)
+  dotnet tool install --global Amazon.Lambda.Tools --version 5.3.0
 ```
 - Terraform https://www.terraform.io/downloads
 
@@ -104,7 +104,10 @@ Install the Amazon Lambda Tools
 ```
   dotnet tool install -g Amazon.Lambda.Tools
 ```
-Create a zipped artifact to be deployed to Amazon Cloud
+Build the solution
+Right click on Buils.ps1 and run with PowerShell
+
+Instead of the previous step it is possible to create a zipped artifact to be deployed to Amazon Cloud with a dotnet lambda cli command
 ```
   cd .\FrameworksAndDrivers
   dotnet lambda package 
