@@ -148,6 +148,7 @@ Create more routes in the mocklab to enrich the CkoBankSimulator test scenarios.
 In terraform:
 <br/>add the aurora postgres with the correct outbound rule to allow migrations and pgAdmin.
 <br/>add a s3 bucket to receive the zipped lambda assemblies (currently the zip artifact upload is manual).
+<br/>add the payment lambda resource.
 <br/>add the sns topic resource.
 <br/>add the sqs resource.
 <br/>add the queue processor lambda resource.
