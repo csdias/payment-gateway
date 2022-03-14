@@ -125,7 +125,7 @@ To destroy everything and stop incorring in costs
 
 # What is done:
 
-The solution with the payment lambda and its tests are building without errors.When running locally (a postgres installation is needed, or a docker installation with a postgres image) the payment lambda exposes an api in which the routes are in place to alow creating payment orders (POST), checking payment order statuses (GET), finding all payments given a merchant id (GET) and updating a payment order (PUT).
+The solution with the payment lambda and its tests are building without errors. The Entity Frameworks creates automatically all the tables in postgres via migrations. When running locally (a postgres installation is needed, or a docker installation with a postgres image) the payment lambda exposes an api in which the routes are in place to alow creating payment orders (POST), checking payment order statuses (GET), finding all payments given a merchant id (GET) and updating a payment order (PUT).
 <br/>
 When the POST method is called, the payment lambda saves the payment order in postgres and then returns a transaction id to the merchants so that the payment order status can be checked in the future using the the same api method GET.
 
