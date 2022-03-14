@@ -51,6 +51,7 @@ Download Terraform and Intall. => https://www.terraform.io/downloads
 - Setup Environment Variables via `export` command or via `appsettings.json` file on the src/InterfaceAdapters path of the repo
 - DotNet 6 Cli (Core SDK)
 - DotNet 6
+- EF Core Tools
 - Node.js (maybe with chocolatey, depending on you)
 - Npm
 - Yarn
