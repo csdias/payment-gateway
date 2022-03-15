@@ -161,7 +161,7 @@ In terraform:
 # Improvements:
 <br/>Add authentication.
 <br/>Modify the payment lambda to use mediator pattern instead of simple dependency injection.
-<br/>Use a rest api gateway instead of a http api gateway proxy. The idea being having dedicated routes and dedicated lighter and faster lambda functions.
+<br/>Use a rest api gateway instead of a http api gateway proxy. The idea is to have dedicated routes and dedicated lighter and faster lambda functions.
 <br/>Use eventual persistence between the moment that lambda persists the payment order in postgres and the moment that it publishes a message in a sns topic.
 <br/>Add restful pagination.
 
