@@ -162,6 +162,7 @@ In terraform:
 <br/>Add authentication.
 <br/>Modify the payment lambda to use mediator pattern instead of simple dependency injection.
 <br/>Use a rest api gateway instead of a http api gateway proxy. The idea is to have dedicated routes and dedicated lighter and faster lambda functions.
+<br/>Create a version of the lambda with a theoretically ligher ORM (Dapper, maybe) and compare with the current EF.
 <br/>Use eventual persistence between the moment that lambda persists the payment order in postgres and the moment that it publishes a message in a sns topic.
 <br/>Add restful pagination.
 
