@@ -1,22 +1,35 @@
+variable "project" {
+  type        = string
+  description = "Payment Gateway"
+}
+
 variable "region" {
-  description = "eu-west-2"
+  type        = string
+  description = "London"
+  default     = "eu-wes-2"
 }
 
-variable "environment" {
-  description = "The Deployment environment"
+variable "aws_account" {
+  description = "The AWS account number"
 }
 
-//Networking
 variable "vpc_cidr" {
-  description = "The CIDR block of the vpc"
 }
 
 variable "public_subnets_cidr" {
   type        = list
-  description = "The CIDR block for the public subnet"
 }
 
 variable "private_subnets_cidr" {
   type        = list
-  description = "The CIDR block for the private subnet"
+}
+
+variable "src_zip_artifact" {
+  description = "Name of the artifact in s3 containing the zipped deployable lambda"
+  type        = string
+}
+
+variable "aws_account_name" {
+  type        = string
+  description = "AWS account alias"
 }
