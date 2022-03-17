@@ -73,7 +73,7 @@ aws_account             = "999999999999"<br/>
 ```
   dotnet tool install --global Amazon.Lambda.Tools --version 5.3.0
 ```
-- Terraform https://www.terraform.io/downloads
+- Terraform 1.1.7 https://www.terraform.io/downloads
 
 
 ### Install dependencies
