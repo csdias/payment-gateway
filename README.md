@@ -24,13 +24,13 @@ Amazon Resources Created Using Terraform
 - 2 Private subnets.
 - 1 Internet Gateway attached to the vpc.
 - 1 Private route table and 1 public route table.
-- 1 NAT Gateway with an elastic ip
+- 1 NAT Gateway with an elastic ip (according with the AWS guides, we could use one for each private subnet to increasy availability)
 - 1 Payment lambda function of proxy type
-- 1 Lambda role with permission to execution inside the vpc to increase lambda availability.
+- 1 Lambda role with permission to execution inside the private subnets on the vpc to access the private resources like, postgres, sns, sqs.
 - 1 Http Api Gateway of proxy type and lambda integration.
 - 1 Subnet group attaching the two public subnets to increase postgres availability and using the vcp security group to allow postgress to be connected exernally.
 - 1 Outbound rule to allow postgres to be connected externally so that we can migrate data.
-- 1 Rds postgres
+- 1 Rds Aurora Postgres
 - 1 Sns topic that will receive payment orders.
 - 1 Sqs that will subscribe to the payment orders topic.
 - 1 Queue processor lambda attached to the Sqs to process the queue items, then call the https://get.mocklab.io/ to simulate the CkoBankSimulator, then update the 
@@ -38,7 +38,7 @@ payment status with the CkoBankSimulator response.
 
 ![aws-infra](https://user-images.githubusercontent.com/16576809/158211364-b6906090-d2ee-4551-9fcb-2ef1a96a3ccb.png)
 
-<br/>(actually in our case it is slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda)
+<br/>(actually in our case it is slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda, sqs and sns)
 
 
 ## Environment Variables
