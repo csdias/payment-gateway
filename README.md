@@ -136,9 +136,8 @@ To destroy everything and stop incurring costs
 The solution with the payment lambda and its tests are building without errors. The Entity Frameworks creates automatically all the tables in postgres via migrations. When running locally, the payment lambda exposes an api with all the routes set up to alow creating payment orders (POST), checking payment order statuses (GET), finding all payments given a merchant id (GET) and updating a payment order (PUT).
 <br/>
 When the POST method is called, the payment lambda saves the payment order in postgres and then returns a transaction id to the merchants so that the payment order status can be checked in the future using the the same api method GET.
-
 <br/>
-The terraform is already working and deploying to an Aws account.
+The terraform is already working and deploying to an Aws account. Among other things, the configuration already allows the private subnets where the lambdas will run to make the necessary external calls to the CkoBankSimulator (https://get.mocklab.io/)
 
 # What needs to be done:
 <br/> Add more validation scenarios. That can be done by just adding rules in the Fluent Validation structure.
@@ -162,7 +161,8 @@ In terraform:
 # Improvements:
 <br/>Add authentication.
 <br/>Modify the payment lambda to use mediator pattern instead of simple dependency injection.
-<br/>Use a rest api gateway instead of a http api gateway proxy. The idea being having dedicated routes and dedicated lighter and faster lambda functions.
+<br/>Use a rest api gateway instead of a http api gateway proxy. The idea is to have dedicated routes and dedicated lighter and faster lambda functions.
+<br/>Create a version of the lambda with a theoretically lighter ORM (Dapper, maybe) and compare with the current EF.
 <br/>Use eventual persistence between the moment that lambda persists the payment order in postgres and the moment that it publishes a message in a sns topic.
 <br/>Add restful pagination.
 
