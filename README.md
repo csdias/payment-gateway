@@ -24,13 +24,13 @@ Amazon Resources Created Using Terraform
 - 2 Private subnets.
 - 1 Internet Gateway attached to the vpc.
 - 1 Private route table and 1 public route table.
-- 1 NAT Gateway with an elastic ip
+- 1 NAT Gateway with an elastic ip (according with the AWS guides, we could use one for each private subnet to increasy availability)
 - 1 Payment lambda function of proxy type
-- 1 Lambda role with permission to execution inside the vpc to increase lambda availability.
+- 1 Lambda role with permission to execution inside the private subnets on the vpc to access the private resources like, postgres, sns, sqs.
 - 1 Http Api Gateway of proxy type and lambda integration.
 - 1 Subnet group attaching the two public subnets to increase postgres availability and using the vcp security group to allow postgress to be connected exernally.
 - 1 Outbound rule to allow postgres to be connected externally so that we can migrate data.
-- 1 Rds postgres
+- 1 Rds Aurora Postgres
 - 1 Sns topic that will receive payment orders.
 - 1 Sqs that will subscribe to the payment orders topic.
 - 1 Queue processor lambda attached to the Sqs to process the queue items, then call the https://get.mocklab.io/ to simulate the CkoBankSimulator, then update the 
@@ -38,14 +38,26 @@ payment status with the CkoBankSimulator response.
 
 ![aws-infra](https://user-images.githubusercontent.com/16576809/158211364-b6906090-d2ee-4551-9fcb-2ef1a96a3ccb.png)
 
-<br/>(actually in our case it is slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda)
+<br/>(actually in our case it is slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda, sqs and sns)
 
 
 ## Environment Variables
 
-* `DATABASE_CONNECTION_STRING` - Connection string with relational database. ie. Host=127.0.0.1;Port=5432;Pooling=true;Database=PaymentGateway;User Id=postgres;Password=postgrespwd;"
-
-* `CKOBANK_SIMULATOR_ENDPOINT` - TBD
+Code:<br/>
+.\src\FrameworksAndDrivers\appsettings.json<br/>
+`DATABASE_CONNECTION_STRING` - Connection string with relational database. ie. Host=127.0.0.1;Port=5432;Pooling=true;Database=PaymentGateway;User Id=postgres;Password=postgrespwd;"<br/>
+ `CKOBANK_SIMULATOR_ENDPOINT` - TBD <br/>
+ 
+Ias:<br/>
+.\src\terraform\terraform.tfvars<br/>
+region                  = "eu-west-2"<br/>
+project                 = "payment-gateway"<br/>
+src_zip_artifact        = "FrameworksAndDrivers.zip"<br/>
+vpc_cidr                = "10.0.0.0/16"<br/>
+public_subnets_cidr     = ["10.0.0.0/24", "10.0.1.0/24"]<br/>
+private_subnets_cidr    = ["10.0.2.0/24", "10.0.3.0/24"]<br/>
+aws_account_name        = "dev"<br/>
+aws_account             = "999999999999"<br/>
 
 ### Installing
 
@@ -61,7 +73,7 @@ payment status with the CkoBankSimulator response.
 ```
   dotnet tool install --global Amazon.Lambda.Tools --version 5.3.0
 ```
-- Terraform https://www.terraform.io/downloads
+- Terraform 1.1.7 https://www.terraform.io/downloads
 
 
 ### Install dependencies
