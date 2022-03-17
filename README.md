@@ -43,9 +43,22 @@ payment status with the CkoBankSimulator response.
 
 ## Environment Variables
 
+Code:<br/>
+.\src\FrameworksAndDrivers\appsettings.json<br/>
 * `DATABASE_CONNECTION_STRING` - Connection string with relational database. ie. Host=127.0.0.1;Port=5432;Pooling=true;Database=PaymentGateway;User Id=postgres;Password=postgrespwd;"
 
-* `CKOBANK_SIMULATOR_ENDPOINT` - TBD
+* `CKOBANK_SIMULATOR_ENDPOINT` - TBD <br/>
+* 
+Ias:<br/>
+.\src\terraform\terraform.tfvars<br/>
+region                  = "eu-west-2"<br/>
+project                 = "payment-gateway"<br/>
+src_zip_artifact        = "FrameworksAndDrivers.zip"<br/>
+vpc_cidr                = "10.0.0.0/16"<br/>
+public_subnets_cidr     = ["10.0.0.0/24", "10.0.1.0/24"]<br/>
+private_subnets_cidr    = ["10.0.2.0/24", "10.0.3.0/24"]<br/>
+aws_account_name        = "dev"<br/>
+aws_account             = "999999999999"<br/>
 
 ### Installing
 
