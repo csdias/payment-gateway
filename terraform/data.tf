@@ -1,3 +1,4 @@
+
 locals {
   availability_zones    = ["${var.region}a", "${var.region}b"]
 }
@@ -138,9 +139,7 @@ resource "aws_route_table_association" "private" {
 #   }
 # }
 
-resource "aws_security_group" "default" {
-  name        = "${var.project}-default-sg"
-  description = "Default security group to allow inbound/outbound from the VPC"
+resource "aws_default_security_group" "default" {
   vpc_id      = "${aws_vpc.vpc.id}"
   depends_on  = [aws_vpc.vpc]
 
@@ -159,7 +158,6 @@ resource "aws_security_group" "default" {
   }
 
   tags = {
-    Name        = "${var.project}-sg"
     Environment = "${var.aws_account_name}"
   }
 }
@@ -175,7 +173,7 @@ resource "aws_s3_bucket" "lambda_bucket" {
   }
 }
 
-data "archive_file" "payment_gateway_src" {
+data "archive_file" "lambda_zip" {
   type        = "zip"
   source_dir  = "${path.root}/../src/FrameworksAndDrivers"
   output_path = "${path.root}/../src/FrameworksAndDrivers/bin/Release/net6.0-windows/${var.src_zip_artifact}"
@@ -191,6 +189,8 @@ resource "aws_lambda_function" "lambda_payment_gateway" {
   function_name     = "PaymentGateway"
   s3_bucket         = aws_s3_bucket.lambda_bucket.id
   s3_key            = aws_s3_bucket_object.lambda_payment_gateway.key
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256                                                                                                                                                
+
   role              = aws_iam_role.iam_role.arn
   handler           = "FrameworksAndDrivers:FrameworksAndDrivers.LambdaEntryPoint::FunctionHandlerAsync"
   runtime           = "dotnet6"
@@ -200,7 +200,7 @@ resource "aws_lambda_function" "lambda_payment_gateway" {
 
   vpc_config {
     subnet_ids         = [aws_subnet.private_subnet[0].id, aws_subnet.private_subnet[1].id] #todo: refactor tech debt
-    security_group_ids = [aws_security_group.default.id]
+    security_group_ids = [aws_default_security_group.default.id]
   }
 
   tags = {
