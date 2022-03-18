@@ -159,7 +159,7 @@ resource "aws_security_group" "default" {
   }
 
   tags = {
-    Name        = "${var.project}-public-route-table"
+    Name        = "${var.project}-sg"
     Environment = "${var.aws_account_name}"
   }
 }
@@ -170,12 +170,12 @@ resource "aws_s3_bucket" "lambda_bucket" {
   force_destroy = true
 
   tags = {
-    Name        = "${var.project}-public-route-table"
+    Name        = "${var.project}-bucket"
     Environment = "${var.aws_account_name}"
   }
 }
 
-data "archive_file" "payment-gateway-src" {
+data "archive_file" "payment_gateway_src" {
   type        = "zip"
   source_dir  = "${path.root}/../src/FrameworksAndDrivers"
   output_path = "${path.root}/../src/FrameworksAndDrivers/bin/Release/net6.0-windows/${var.src_zip_artifact}"
@@ -187,7 +187,7 @@ resource "aws_s3_bucket_object" "lambda_payment_gateway" {
   source = "${path.root}/../src/FrameworksAndDrivers/bin/Release/net6.0-windows/${var.src_zip_artifact}"
 }
 
-resource "aws_lambda_function" "lambda-payment-gateway" {
+resource "aws_lambda_function" "lambda_payment_gateway" {
   function_name     = "PaymentGateway"
   s3_bucket         = aws_s3_bucket.lambda_bucket.id
   s3_key            = aws_s3_bucket_object.lambda_payment_gateway.key
@@ -204,7 +204,7 @@ resource "aws_lambda_function" "lambda-payment-gateway" {
   }
 
   tags = {
-    Name        = "${var.project}-public-route-table"
+    Name        = "${var.project}-lambda"
     Environment = "${var.aws_account_name}"
   }
 }
@@ -245,25 +245,24 @@ resource "aws_apigatewayv2_api" "api" {
   }
 
   tags = {
-    Name        = "${var.project}-public-route-table"
+    Name        = "${var.project}-api-gw"
     Environment = "${var.aws_account_name}"
   }
 }
 
 resource "aws_apigatewayv2_route" "route" {
   api_id             = aws_apigatewayv2_api.api.id
-  route_key          = "GET /{proxy+}"
+  route_key          = "ANY /{proxy+}"
   target             = "integrations/${aws_apigatewayv2_integration.integration.id}"
 }
 
 resource "aws_apigatewayv2_integration" "integration" {
-  api_id           = aws_apigatewayv2_api.api.id
-  integration_type = "AWS_PROXY"
-
+  api_id               = aws_apigatewayv2_api.api.id
+  integration_type     = "AWS_PROXY"
   connection_type      = "INTERNET"
   description          = "This is our {proxy+} integration"
   integration_method   = "POST"
-  integration_uri      = aws_lambda_function.lambda-payment-gateway.invoke_arn
+  integration_uri      = aws_lambda_function.lambda_payment_gateway.invoke_arn
   passthrough_behavior = "WHEN_NO_MATCH"
 
   lifecycle {
@@ -271,4 +270,14 @@ resource "aws_apigatewayv2_integration" "integration" {
       passthrough_behavior
     ]
   }
+}
+
+resource "aws_lambda_permission" "api_gw_lambda" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambda_payment_gateway.function_name
+  principal     = "apigateway.amazonaws.com"
+
+  # More: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html
+  source_arn = "arn:aws:execute-api:${var.region}:${var.aws_account}:${aws_apigatewayv2_api.api.id}/*/${aws_apigatewayv2_integration.integration.integration_method}{/proxy+}"
 }
