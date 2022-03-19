@@ -192,7 +192,7 @@ resource "aws_lambda_function" "lambda_payment_gateway" {
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256                                                                                                                                                
 
   role              = aws_iam_role.iam_role.arn
-  handler           = "FrameworksAndDrivers:FrameworksAndDrivers.LambdaEntryPoint::FunctionHandlerAsync"
+  handler           = "FrameworksAndDrivers::FrameworksAndDrivers.LambdaEntryPoint::FunctionHandlerAsync"
   runtime           = "dotnet6"
   memory_size       = "256"
   timeout           = 120
@@ -272,6 +272,12 @@ resource "aws_apigatewayv2_integration" "integration" {
   }
 }
 
+resource "aws_apigatewayv2_stage" this {
+  api_id               = aws_apigatewayv2_api.api.id
+  name                 = "$default"
+  auto_deploy = true
+}
+
 resource "aws_lambda_permission" "api_gw_lambda" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
@@ -279,5 +285,5 @@ resource "aws_lambda_permission" "api_gw_lambda" {
   principal     = "apigateway.amazonaws.com"
 
   # More: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html
-  source_arn = "arn:aws:execute-api:${var.region}:${var.aws_account}:${aws_apigatewayv2_api.api.id}/*/${aws_apigatewayv2_integration.integration.integration_method}{/proxy+}"
+  source_arn = "arn:aws:execute-api:${var.region}:${var.aws_account}:${aws_apigatewayv2_api.api.id}/*/*/{proxy+}"
 }
