@@ -90,11 +90,22 @@ You can check the results on the prompt or open the coverage folder, inside it, 
 
 ### Running locally
 
-First install postgres https://www.postgresql.org/download/ or docker with a postgres image https://www.docker.com/products/docker-desktop
+Without Docker:
+Install postgres https://www.postgresql.org/download/
 
-Open the solution and press F5
+Open the solution and press F5. This will automatically open the swagger api in the browser
 
-Use the Payment Transation fc782e65-0117-4c5e-b6d0-afa845effa3e in the GET method
+With Docker:
+Install docker with a postgres image https://www.docker.com/products/docker-desktop
+
+Run 
+```
+  cd .\Payment-Gateway
+  docker-compose up pg-api
+```
+Open the browser, point localhost:5000/payments. This wil open the swagger api.
+
+Now, use the Payment Transation fc782e65-0117-4c5e-b6d0-afa845effa3e in the GET method
 
 ### Deploying to Cloud
 

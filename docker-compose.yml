@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 services:
 
@@ -23,6 +23,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: "test@test.com"
       PGADMIN_DEFAULT_PASSWORD: "123"
     ports:
+      - "15432:15432"
     depends_on:
       - pg-postgres
     networks:
@@ -38,7 +39,7 @@ services:
     container_name: pg-api
     build:
       context: .
-      dockerfile: Dockerfile.external
+      dockerfile: Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       DATABASE_CONNECTION_STRING: "Host=deebee;Port=5432;Pooling=true;Database=paymentgateway;User Id=postgres;Password=postgrespwd;"
@@ -56,4 +57,4 @@ services:
 
 networks:
   pg-net:
-    external: true
+    external: false
