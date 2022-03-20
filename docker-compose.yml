@@ -23,7 +23,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: "test@test.com"
       PGADMIN_DEFAULT_PASSWORD: "123"
     ports:
-      - "15432:15432"
+      - "15432:80"
     depends_on:
       - pg-postgres
     networks:
@@ -43,10 +43,12 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       DATABASE_CONNECTION_STRING: "Host=deebee;Port=5432;Pooling=true;Database=paymentgateway;User Id=postgres;Password=postgrespwd;"
+      ASPNETCORE_URLS: http://+:80
     ports:
       - "5000:80"
     depends_on:
-      - pg-postgres      
+      - pg-postgres  
+      - pg-pgadmin4
     networks:
       - pg-net     
     links:
