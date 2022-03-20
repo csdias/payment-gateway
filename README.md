@@ -90,7 +90,7 @@ You can check the results on the prompt or open the coverage folder, inside it, 
 
 ### Running locally
 
-<b>Without Docker:</b>
+<h4>Without Docker:</h4>
 Install postgres https://www.postgresql.org/download/
 
 Open the solution and press F5. This will automatically open the swagger api in the browser
