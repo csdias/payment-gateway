@@ -17,13 +17,13 @@ namespace FrameworksAndDrivers
 
         public override Task<APIGatewayHttpApiV2ProxyResponse> FunctionHandlerAsync(APIGatewayHttpApiV2ProxyRequest request, ILambdaContext lambdaContext)
         {
-            // Include Lambda & API Gateway request ids on all log entries written during the request
-            using (LogContext.Push(
-                new PropertyEnricher("LambdaRequestId", lambdaContext.AwsRequestId),
-                new PropertyEnricher("ApiGatewayRequestId", request.RequestContext.RequestId)))
-            {
-                return base.FunctionHandlerAsync(request, lambdaContext);
-            }
+           // Include Lambda & API Gateway request ids on all log entries written during the request
+           using (LogContext.Push(
+               new PropertyEnricher("LambdaRequestId", lambdaContext.AwsRequestId),
+               new PropertyEnricher("ApiGatewayRequestId", request.RequestContext.RequestId)))
+           {
+               return base.FunctionHandlerAsync(request, lambdaContext);
+           }
         }
 
     }
