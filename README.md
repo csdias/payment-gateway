@@ -48,7 +48,7 @@ Code:<br/>
 `DATABASE_CONNECTION_STRING` - Connection string with relational database. ie. Host=127.0.0.1;Port=5432;Pooling=true;Database=PaymentGateway;User Id=postgres;Password=postgrespwd;"<br/>
  `CKOBANK_SIMULATOR_ENDPOINT` - TBD <br/>
  
-Ias:<br/>
+IaS:<br/>
 .\src\terraform\terraform.tfvars<br/>
 region                  = "eu-west-2"<br/>
 project                 = "payment-gateway"<br/>
