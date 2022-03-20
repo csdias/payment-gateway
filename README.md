@@ -48,7 +48,7 @@ Code:<br/>
 `DATABASE_CONNECTION_STRING` - Connection string with relational database. ie. Host=127.0.0.1;Port=5432;Pooling=true;Database=PaymentGateway;User Id=postgres;Password=postgrespwd;"<br/>
  `CKOBANK_SIMULATOR_ENDPOINT` - TBD <br/>
  
-Ias:<br/>
+IaS:<br/>
 .\src\terraform\terraform.tfvars<br/>
 region                  = "eu-west-2"<br/>
 project                 = "payment-gateway"<br/>
@@ -61,7 +61,7 @@ aws_account             = "999999999999"<br/>
 
 ### Installing
 
-- Setup Environment Variables via `export` command or via `appsettings.json` file on the src/InterfaceAdapters path of the repo
+- Setup Environment Variables via `export` command or via `appsettings.json` file on the src/FrameworksAndDrivers path of the repo
 
 - .NET 6 SDK https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 - Entity Framework Core Tools for the .NET Command-Line Interface.
