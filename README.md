@@ -61,7 +61,7 @@ aws_account             = "999999999999"<br/>
 
 ### Installing
 
-- Setup Environment Variables via `export` command or via `appsettings.json` file on the src/InterfaceAdapters path of the repo
+- Setup Environment Variables via `export` command or via `appsettings.json` file on the src/FrameworksAndDrivers path of the repo
 
 - .NET 6 SDK https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 - Entity Framework Core Tools for the .NET Command-Line Interface.
