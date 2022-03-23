@@ -16,15 +16,7 @@ namespace FrameworksAndDrivers.Database.Contexts
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            try
-            {
-                Database.Migrate();
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-
+            Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

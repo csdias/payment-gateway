@@ -1,4 +1,7 @@
+using ApplicationBusinessRules;
+using AutoMapper;
 using EnterpriseBusinessRules.Entities;
+using EnterpriseBusinessRules.Sns.Entities;
 using FrameworksAndDrivers.Database.Models;
 
 namespace FrameworksAndDrivers.Mappers.Profiles
@@ -9,6 +12,11 @@ namespace FrameworksAndDrivers.Mappers.Profiles
         {
             CreateMap<PaymentModel, Payment>();
             CreateMap<Payment, PaymentModel>();
+
+            CreateMap<OutboxMessage, SnsMessage>()
+                .ForMember(dest => dest.Payload,
+                    opt => opt.ConvertUsing(new JsonObjectConverter(), src => src.Payload));
+
         }
     }
 }

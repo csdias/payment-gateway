@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using EnterpriseBusinessRules;
 using ApplicationBusinessRules.UseCases;
 using ApplicationBusinessRules.Services;
 using ApplicationBusinessRules.Interfaces;
+using Amazon.SimpleNotificationService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ApplicationBusinessRules
 {
@@ -19,8 +20,9 @@ namespace ApplicationBusinessRules
                 .AddScoped<ICreatePaymentUseCase, CreatePaymentUseCase>()
                 .AddScoped<IUpdatePaymentStatusUseCase, UpdatePaymentStatusUseCase>()
                 .AddScoped<IValidateCreditCardUseCase, ValidateCreditCardUseCase>()
-                .AddScoped<IPaymentQueueProcessorService, PaymentQueueProcessorService>()
-                .AddScoped<IPaymentService, PaymentService>();
+                .AddScoped<IPaymentService, PaymentService>()
+                .AddTransient<IPaymentPublisherService, PaymentPublisherService>()
+                .AddAWSService<IAmazonSimpleNotificationService>();
         }
 
         public static IApplicationBuilder UseApplicationBusinessRules(this IApplicationBuilder app, 

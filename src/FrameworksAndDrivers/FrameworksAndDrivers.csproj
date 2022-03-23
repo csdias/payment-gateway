@@ -1,18 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <LangVersion>latest</LangVersion>
+    <TargetFramework>net6.0</TargetFramework>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <AWSProjectType>Lambda</AWSProjectType>
+    <!-- This property makes the build directory similar to a publish directory and helps the AWS .NET Lambda Mock Test Tool find project dependencies. -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <!--Swagger set up-->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <!--End:Swagger set up-->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Amazon.Extensions.Configuration.SystemsManager" Version="3.0.0" />
-    <PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="7.0.1" />
+    <PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="7.1.0" />
     <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.2" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
-    <PackageReference Include="Serilog.Expressions" Version="3.3.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+    <PackageReference Include="Serilog.Expressions" Version="3.3.0" />
+
   </ItemGroup>
 
   <ItemGroup>
@@ -63,5 +73,4 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
   
-
 </Project>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EnterpriseBusinessRules.Entities;
 using ApplicationBusinessRules.Interfaces;
 using ApplicationBusinessRules.Helpers;
+using EnterpriseBusinessRules.Sns.Entities;
 
 namespace ApplicationBusinessRules.Services
 {
@@ -14,21 +15,20 @@ namespace ApplicationBusinessRules.Services
         private readonly ICreatePaymentUseCase _createPayment;
         private readonly IUpdatePaymentStatusUseCase _updatePaymentStatus;
         private readonly IValidateCreditCardUseCase _validateCreditCard;
-        private readonly IPaymentQueueProcessorService _queueProcessor;
-
+        private readonly IPaymentPublisherService _paymentPublisherService;
 
         public PaymentService (
             IGetPaymentUseCase getPayment,
             ICreatePaymentUseCase createPayment,
             IUpdatePaymentStatusUseCase updatePaymentStatus,
-            IPaymentQueueProcessorService queueProcessor,
+            IPaymentPublisherService publisher,
             IValidateCreditCardUseCase validateCreditCard
         ) 
         {
             _getPayment = getPayment;
             _createPayment = createPayment;
             _updatePaymentStatus = updatePaymentStatus;
-            _queueProcessor = queueProcessor;
+            _paymentPublisherService = publisher;
             _validateCreditCard = validateCreditCard;
     }
 
@@ -46,13 +46,21 @@ namespace ApplicationBusinessRules.Services
         {
             var result = new Response<Payment>();
 
-            // Validate Payment
+            // Validate payment
             result = await _createPayment.CreatePayment(payment);
 
-            // Insert Payment in the Queue
-            var publish = await _queueProcessor.PublishPaymentOrder(payment);
+            // Prepare outbox message
+            var outboxMessage = new OutboxMessage() {
+                MessageId = Guid.NewGuid(),
+                Payload = "Payload",
+                Event = "PaymentOrderEvent",
+                TopicArn = "PaymentOrderTopic"
+            };
 
-            // Validate Item Queue
+            // Push payment order to sns
+            var publish = await _paymentPublisherService.PublishMessage(outboxMessage);
+
+            // Validate push ???
 
             return result;
         }

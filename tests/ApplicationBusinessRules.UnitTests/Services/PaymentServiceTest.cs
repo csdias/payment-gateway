@@ -18,14 +18,14 @@ namespace ApplicationBusinessRules.UnitTests.UseCases
         private readonly Mock<ICreatePaymentUseCase> _mockCreatePaymentUseCase;
         private readonly Mock<IUpdatePaymentStatusUseCase> _mockUpdatePaymentStatusUseCase;
         private readonly Mock<IValidateCreditCardUseCase> _validateCreditCardUseCase;
-        private readonly Mock<IPaymentQueueProcessorService> _paymentQueueProcessorService;
+        private readonly Mock<IPaymentPublisherService> _paymentPublisherService;
 
         public PaymentServiceTest() {
             _mockGetPaymentUseCase = new Mock<IGetPaymentUseCase>(MockBehavior.Strict);
             _mockCreatePaymentUseCase = new Mock<ICreatePaymentUseCase>(MockBehavior.Strict);
             _mockUpdatePaymentStatusUseCase = new Mock<IUpdatePaymentStatusUseCase>(MockBehavior.Strict);
             _validateCreditCardUseCase = new Mock<IValidateCreditCardUseCase>(MockBehavior.Strict);
-            _paymentQueueProcessorService = new Mock<IPaymentQueueProcessorService>(MockBehavior.Strict);
+            _paymentPublisherService = new Mock<IPaymentPublisherService>(MockBehavior.Strict);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace ApplicationBusinessRules.UnitTests.UseCases
             _mockGetPaymentUseCase.Setup(s => s.GetPayment(It.IsAny<Guid>()))
                     .Returns(() => Task.Run( () => expectedResponseFromUseCase));
             var sut = new PaymentService(_mockGetPaymentUseCase.Object, _mockCreatePaymentUseCase.Object,
-                    _mockUpdatePaymentStatusUseCase.Object, _paymentQueueProcessorService.Object,
+                    _mockUpdatePaymentStatusUseCase.Object, _paymentPublisherService.Object,
                     _validateCreditCardUseCase.Object);
 
             // Act
@@ -58,7 +58,7 @@ namespace ApplicationBusinessRules.UnitTests.UseCases
                     .Returns(() => Task.Run(() => expectedResponseFromUseCase));
 
             var sut = new PaymentService(_mockGetPaymentUseCase.Object, _mockCreatePaymentUseCase.Object,
-                    _mockUpdatePaymentStatusUseCase.Object, _paymentQueueProcessorService.Object,
+                    _mockUpdatePaymentStatusUseCase.Object, _paymentPublisherService.Object,
                     _validateCreditCardUseCase.Object);
 
             // Act
