@@ -180,8 +180,13 @@ The terraform is already working and deploying to an Aws account. Among other th
 <br/>Add authentication.
 <br/>Modify the payment lambda to use mediator pattern instead of simple dependency injection.
 <br/>Use a rest api gateway instead of a http api gateway proxy. The idea is to have dedicated routes and dedicated lighter and faster lambda functions.
-<br/>Create a version of the lambda with a theoretically lighter ORM (Dapper, maybe) and compare with the current EF.
-<br/>Use eventual persistence between the moment that lambda persists the payment order in postgres and the moment that it publishes a message in a sns topic.
+<br/>Create a version of the lambda with a theoretically lighter ORM (Dapper, maybe) and compare it with the current EF.
 <br/>Add restful pagination.
+<br/>Concurrent Message Consumption Pattern
+<br/>Concurrent Message Publication Pattern
+<br/>Inbox Pattern
+<br/>Message Exchange Pattern
+<br/>Outbox Pattern
+<br/>Replay Pattern 
 
 
