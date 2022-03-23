@@ -8,7 +8,7 @@ it uses message queue pattern and it is hosted in the cloud for high availabilit
 
 ![clean_architecture](https://user-images.githubusercontent.com/16576809/158211294-48b0d242-a61a-4d99-a33f-6976e2017681.jpg)
 
-## Mechanism
+## Overall Mechanism
 There is a payment lambda that exposes an api that receives payment orders and writes them in an aurora postgres. This api is meant to be used by the merchants.
 The payment lambda saves the payment order and returns a transaction id so that the merchants can track the status of payment orders in a future time when it is done processing.
 The payment lambda publishes a message in a sns topic so that the credit analysis is decoupled and scalable.
@@ -36,7 +36,7 @@ Amazon Resources Created Using Terraform
 - 1 Queue processor lambda attached to the Sqs to process the queue items, then call the https://get.mocklab.io/ to simulate the CkoBankSimulator, then update the 
 payment status with the CkoBankSimulator response.
 
-<br/>The figure bellow is a structure slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda, sqs and sns)
+The figure bellow is a structure slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda, sqs and sns <br/><br/>
 ![aws-infra](https://user-images.githubusercontent.com/16576809/158211364-b6906090-d2ee-4551-9fcb-2ef1a96a3ccb.png)
 
 ## Environment Variables
