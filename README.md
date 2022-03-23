@@ -36,10 +36,8 @@ Amazon Resources Created Using Terraform
 - 1 Queue processor lambda attached to the Sqs to process the queue items, then call the https://get.mocklab.io/ to simulate the CkoBankSimulator, then update the 
 payment status with the CkoBankSimulator response.
 
+<br/>The figure bellow is a structure slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda, sqs and sns)
 ![aws-infra](https://user-images.githubusercontent.com/16576809/158211364-b6906090-d2ee-4551-9fcb-2ef1a96a3ccb.png)
-
-<br/>(actually in our case it is slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda, sqs and sns)
-
 
 ## Environment Variables
 
