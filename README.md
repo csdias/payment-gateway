@@ -159,11 +159,11 @@ The solution with the payment lambda and its tests are building without errors. 
 <br/>
 When the POST method is called, the payment lambda saves the payment order in postgres and then returns a transaction id to the merchants so that the payment order status can be checked in the future using the the same api method GET.
 <br/>
-The terraform is already working and deploying to an Aws account. Among other things, the configuration already allows the private subnets where the lambdas will run to make the necessary external calls to the CkoBankSimulator (https://get.mocklab.io/)
+The terraform is already working and deploying to an Aws account. Among other things, the configuration already allows the private subnets where the lambdas will run to make the necessary external calls to the CkoBankSimulator (https://get.mocklab.io/).
 
 # What needs to be done:
 <br/>Configuration in Terraform:
-<br/>AWS Aurora Postgres Resource
+<br/>AWS Aurora Postgres Resource.
 <br/>AWS SNS Topic Resource.
 <br/>AWS SQS Resource.
 <br/>AWS Queue Processor Lambda Resource.
@@ -179,14 +179,14 @@ The terraform is already working and deploying to an Aws account. Among other th
 # Improvements:
 <br/>Add authentication.
 <br/>Modify the payment lambda to use mediator pattern instead of simple dependency injection.
-<br/>Use a rest api gateway instead of a http api gateway proxy. The idea is to have dedicated routes and dedicated lighter and faster lambda functions.
+<br/>Use a rest api gateway instead of a http api gateway proxy. The idea would be to have dedicated routes and dedicated lighter and faster lambda functions.
 <br/>Create a version of the lambda with a theoretically lighter ORM (Dapper, maybe) and compare it with the current EF.
 <br/>Add restful pagination.
-<br/>Concurrent Message Consumption Pattern
-<br/>Concurrent Message Publication Pattern
-<br/>Inbox Pattern
-<br/>Message Exchange Pattern
-<br/>Outbox Pattern
-<br/>Replay Pattern 
+<br/>Add Concurrent Message Consumption Pattern.
+<br/>Add Concurrent Message Publication Pattern.
+<br/>Add Inbox Pattern.
+<br/>Add Message Exchange Pattern.
+<br/>Add Outbox Pattern.
+<br/>Add Replay Pattern.
 
 
