@@ -1,9 +1,16 @@
-region                  = "eu-west-2"
-project                 = "payment-gateway"
-src_zip_artifact        = "FrameworksAndDrivers.zip"
-vpc_cidr                = "10.0.0.0/16"
-public_subnets_cidr     = ["10.0.0.0/24", "10.0.1.0/24"] 
-private_subnets_cidr    = ["10.0.2.0/24", "10.0.3.0/24"]
-aws_account_name        = "dev"
-aws_account             = "542406028330"
-
+region                      = "eu-west-2"
+project                     = "payment-gateway"
+src_zip_artifact            = "FrameworksAndDrivers.zip"
+consumer_artifact_zip       = "QueueProcesso.zip"
+vpc_cidr                    = "10.0.0.0/16"
+public_subnets_cidr         = ["10.0.0.0/24", "10.0.1.0/24"] 
+private_subnets_cidr        = ["10.0.2.0/24", "10.0.3.0/24"]
+aws_account_name            = "dev"
+aws_account                 = "542406028330"
+sns_filter_policy           = ["PaymentOrderEvent"]
+rds_auto_pause              = true
+rds_max_capacity            = 8
+rds_min_capacity            = 2 # 2 is minimum for Aurora Postgres
+rds_auto_pause_delay        = 1800
+rds_backup_retention_period = 2
+rds_deletion_protection     = false

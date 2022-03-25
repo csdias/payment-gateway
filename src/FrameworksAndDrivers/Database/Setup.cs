@@ -9,6 +9,7 @@ using FrameworksAndDrivers.Database.Contexts;
 using FrameworksAndDrivers.Database.Repositories;
 using Microsoft.Extensions.Hosting;
 using FrameworksAndDrivers.Database.Models;
+using Npgsql;
 
 namespace FrameworksAndDrivers.Database
 {
@@ -16,10 +17,27 @@ namespace FrameworksAndDrivers.Database
     {
         public static IServiceCollection AddFrameworksAndDriversDatabase(this IServiceCollection services, IConfiguration configuration)
         {
+            string hostname = "127.0.0.1";
+
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Lambda Development")
+            {
+                hostname = Environment.GetEnvironmentVariable("RDS_HOSTNAME");
+            }
+
+            var dbConnectionBuilder = new NpgsqlConnectionStringBuilder()
+            {
+                Host = hostname,
+                Port = 5432,
+                Username = "postgres",
+                Database = "PaymentGateway",
+                Password = "postgrespwd",
+                MaxPoolSize = 100
+            };
+
             services
                 .AddScoped<IPaymentRepository, PaymentRepository>()
                 .AddDbContext<ApplicationDbContext>(
-                    options => options.UseNpgsql(configuration["DATABASE_CONNECTION_STRING"])
+                    options => options.UseNpgsql(dbConnectionBuilder.ConnectionString)
                 );
             return services;
         }

@@ -56,10 +56,19 @@ function RestoreAndBuild {
     Write-Host "+----------------------------------------------------------------------------------------------"
 }
 
-function PublishMainLambda {
-    Write-Host "| PUBLISH MAIN LAMBDA"
+function PublishPaymentLambda {
+    Write-Host "| PUBLISH PAYMENT LAMBDA"
     Write-Host "|   Creating archives"
     ./tool/dotnet-lambda package -pl FrameworksAndDrivers -o Publish\payment-gateway-api.zip
+    if ($LASTEXITCODE -ne 0) { throw "Pack of Lambda failed" }
+
+    Write-Host "+----------------------------------------------------------------------------------------------"
+}
+
+function PublishQueueProcessorLambda {
+    Write-Host "| PUBLISH QUEUE PROCESSOR LAMBDA"
+    Write-Host "|   Creating archives"
+    ./tool/dotnet-lambda package -pl QueueProcessor -o Publish\queue-processor.zip
     if ($LASTEXITCODE -ne 0) { throw "Pack of Lambda failed" }
 
     Write-Host "+----------------------------------------------------------------------------------------------"
@@ -121,7 +130,8 @@ try {
     Clean
     RestoreAndBuild
     UnitTest
-    PublishMainLambda
+    PublishPaymentLambda
+    PublishQueueProcessorLambda
 
     Write-Host "+---------------------------------------------------------------------------------------------"
     Write-Host "| SUCCEEDED"
