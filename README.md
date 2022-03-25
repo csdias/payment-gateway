@@ -164,17 +164,10 @@ When the POST method is called, the payment lambda saves the payment order in po
 The terraform is already working and deploying to an Aws account. Among other things, the configuration already allows the private subnets where the lambdas will run to make the necessary external calls to the CkoBankSimulator (https://get.mocklab.io/).
 
 # What needs to be done:
-<br/>Configuration in Terraform:
-<br/>AWS Aurora Postgres Resource.
-<br/>AWS SNS Topic Resource.
-<br/>AWS SQS Resource.
-<br/>AWS Queue Processor Lambda Resource.
-
-<br/>Code:
 <br/>Add more validation scenarios.
 <br/>Add more test scenarios.
 <br/>Fix integrations tests.
-<br/>Create the dotnet queue processor lambda function.
+<br/>Finish the dotnet queue processor lambda function.
 <br/>Create routes https://get.mocklab.io/ to simulate the CkoBankSimulator.
 <br/>Create the tests for the queue processor lambda.
  
