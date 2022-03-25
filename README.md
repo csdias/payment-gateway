@@ -8,7 +8,7 @@ it uses message queue pattern and it is hosted in the cloud for high availabilit
 
 ![clean_architecture](https://user-images.githubusercontent.com/16576809/158211294-48b0d242-a61a-4d99-a33f-6976e2017681.jpg)
 
-## Mechanism
+## Overall Mechanism
 There is a payment lambda that exposes an api that receives payment orders and writes them in an aurora postgres. This api is meant to be used by the merchants.
 The payment lambda saves the payment order and returns a transaction id so that the merchants can track the status of payment orders in a future time when it is done processing.
 The payment lambda publishes a message in a sns topic so that the credit analysis is decoupled and scalable.
@@ -36,10 +36,8 @@ Amazon Resources Created Using Terraform
 - 1 Queue processor lambda attached to the Sqs to process the queue items, then call the https://get.mocklab.io/ to simulate the CkoBankSimulator, then update the 
 payment status with the CkoBankSimulator response.
 
+The figure bellow is a structure slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda, sqs and sns <br/><br/>
 ![aws-infra](https://user-images.githubusercontent.com/16576809/158211364-b6906090-d2ee-4551-9fcb-2ef1a96a3ccb.png)
-
-<br/>(actually in our case it is slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda, sqs and sns)
-
 
 ## Environment Variables
 
@@ -50,14 +48,18 @@ Code:<br/>
  
 IaS:<br/>
 .\src\terraform\terraform.tfvars<br/>
-region                  = "eu-west-2"<br/>
-project                 = "payment-gateway"<br/>
-src_zip_artifact        = "FrameworksAndDrivers.zip"<br/>
-vpc_cidr                = "10.0.0.0/16"<br/>
-public_subnets_cidr     = ["10.0.0.0/24", "10.0.1.0/24"]<br/>
-private_subnets_cidr    = ["10.0.2.0/24", "10.0.3.0/24"]<br/>
-aws_account_name        = "dev"<br/>
-aws_account             = "999999999999"<br/>
+
+| Name                 | Value                            |
+| ---------------------| -------------------------------- |
+| region               | = "eu-west-2"                    |
+| project              | = "payment-gateway"              |
+| src_zip_artifact     | = "FrameworksAndDrivers.zip"     |
+| vpc_cidr             | = "10.0.0.0/16"                  |
+| public_subnets_cidr  | = ["10.0.0.0/24", "10.0.1.0/24"] |
+| private_subnets_cidr | = ["10.0.2.0/24", "10.0.3.0/24"] |
+| aws_account_name     | = "dev"                          |
+| aws_account          |  = "999999999999"                |
+
 
 ### Installing
 
@@ -159,11 +161,11 @@ The solution with the payment lambda and its tests are building without errors. 
 <br/>
 When the POST method is called, the payment lambda saves the payment order in postgres and then returns a transaction id to the merchants so that the payment order status can be checked in the future using the the same api method GET.
 <br/>
-The terraform is already working and deploying to an Aws account. Among other things, the configuration already allows the private subnets where the lambdas will run to make the necessary external calls to the CkoBankSimulator (https://get.mocklab.io/)
+The terraform is already working and deploying to an Aws account. Among other things, the configuration already allows the private subnets where the lambdas will run to make the necessary external calls to the CkoBankSimulator (https://get.mocklab.io/).
 
 # What needs to be done:
 <br/>Configuration in Terraform:
-<br/>AWS Aurora Postgres Resource
+<br/>AWS Aurora Postgres Resource.
 <br/>AWS SNS Topic Resource.
 <br/>AWS SQS Resource.
 <br/>AWS Queue Processor Lambda Resource.
@@ -179,9 +181,14 @@ The terraform is already working and deploying to an Aws account. Among other th
 # Improvements:
 <br/>Add authentication.
 <br/>Modify the payment lambda to use mediator pattern instead of simple dependency injection.
-<br/>Use a rest api gateway instead of a http api gateway proxy. The idea is to have dedicated routes and dedicated lighter and faster lambda functions.
-<br/>Create a version of the lambda with a theoretically lighter ORM (Dapper, maybe) and compare with the current EF.
-<br/>Use eventual persistence between the moment that lambda persists the payment order in postgres and the moment that it publishes a message in a sns topic.
+<br/>Use a rest api gateway instead of a http api gateway proxy. The idea would be to have dedicated routes and dedicated lighter and faster lambda functions.
+<br/>Create a version of the lambda with a theoretically lighter ORM (Dapper, maybe) and compare it with the current EF.
 <br/>Add restful pagination.
+<br/>Add Concurrent Message Consumption Pattern.
+<br/>Add Concurrent Message Publication Pattern.
+<br/>Add Inbox Pattern.
+<br/>Add Message Exchange Pattern.
+<br/>Add Outbox Pattern.
+<br/>Add Replay Pattern.
 
 
