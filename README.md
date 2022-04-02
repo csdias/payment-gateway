@@ -14,7 +14,7 @@ The payment lambda saves the payment order and returns a transaction id so that 
 The payment lambda publishes a message in a sns topic so that the credit analysis is decoupled and scalable.
 A queue subscribes to this sns topic.
 A queue processor lambda is hooked up to this queue.
-The queue processor lambda process each new queue item by unwrapping the the payload from message, calling the CkoBankSimulator with the payment payload and updating the the payment order status with the CkoBankSimulator response.
+The queue processor lambda process each new queue item by unwrapping the the payload from message, calling the bank simulator with the payment payload and updating the the payment order status with the bank simulator response.
 
 ## AWS Environment
 Amazon Resources Created Using Terraform
@@ -33,8 +33,8 @@ Amazon Resources Created Using Terraform
 - 1 Rds Aurora Postgres
 - 1 Sns topic that will receive payment orders.
 - 1 Sqs that will subscribe to the payment orders topic.
-- 1 Queue processor lambda attached to the Sqs to process the queue items, then call the https://get.mocklab.io/ to simulate the CkoBankSimulator, then update the 
-payment status with the CkoBankSimulator response.
+- 1 Queue processor lambda attached to the Sqs to process the queue items, then call the https://get.mocklab.io/ to simulate the a bank, then update the 
+payment status with the simulator response.
 
 The figure bellow is a structure slightly different, the 2 public subnet related to a subnet group will host postgres and the 2 private subnets will host lambda, sqs and sns <br/><br/>
 ![aws-infra](https://user-images.githubusercontent.com/16576809/158211364-b6906090-d2ee-4551-9fcb-2ef1a96a3ccb.png)
@@ -44,7 +44,7 @@ The figure bellow is a structure slightly different, the 2 public subnet related
 Code:<br/>
 .\src\FrameworksAndDrivers\appsettings.json<br/>
 `DATABASE_CONNECTION_STRING` - Connection string with relational database. ie. Host=127.0.0.1;Port=5432;Pooling=true;Database=PaymentGateway;User Id=postgres;Password=postgrespwd;"<br/>
- `CKOBANK_SIMULATOR_ENDPOINT` - TBD <br/>
+ `BANK_SIMULATOR_ENDPOINT` - TBD <br/>
  
 IaS:<br/>
 .\src\terraform\terraform.tfvars<br/>
